@@ -16,13 +16,13 @@ export const Input = (props: InputProps) => {
 
   return (
     <div className='mb-4'>
-      <div className='relative z-0 m-4'>
+      <div className='relative z-0'>
         <input
           type={type}
           id={id}
-          className={`block py-2.5 px-0 w-full text-sm text-color bg-transparent border-0 border-b-2 border-border appearance-none dark:text-color-dark dark:border-border-dark dark:focus:border-background focus:outline-none focus:ring-0 focus:border-primary ${
+          className={`block w-full appearance-none border-0 border-b-2 border-border bg-transparent px-0 pb-1 pt-4 text-sm text-color focus:border-primary focus:outline-none focus:ring-0 dark:border-border-dark dark:text-color-dark dark:focus:border-background ${
             !!error
-              ? 'border-error dark:border-error-dark focus:border-error dark:focus:border-error-dark'
+              ? 'border-error focus:border-error dark:border-error-dark dark:focus:border-error-dark'
               : ''
           } peer`}
           placeholder=' '
@@ -30,7 +30,7 @@ export const Input = (props: InputProps) => {
         />
         <label
           htmlFor={id}
-          className={`absolute text-sm text-light dark:text-light-dark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-required:after:content-['*'] peer-required:after:ml-0.5 after:text-error ${
+          className={`absolute top-4 z-10 origin-[0] -translate-y-5 scale-75 transform text-sm text-light duration-300 after:text-error peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-required:after:ml-0.5 peer-required:after:content-['*'] peer-focus:start-0 peer-focus:-translate-y-5 peer-focus:scale-75 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-light-dark ${
             !!error ? 'text-error dark:text-error-dark' : ''
           }
           `}
