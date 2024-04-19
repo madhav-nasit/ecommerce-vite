@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'selector',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -21,9 +22,9 @@ export default {
         'light-dark': '#A8ACB1',
         'error-dark': '#FF2800',
         'success-dark': '#00B38F',
-        'border-dark': '#3C4148',
+        'border-dark': '#E8ECEF',
       },
     },
   },
-  plugins: [],
+  plugins: ['prettier-plugin-tailwindcss'],
 };
