@@ -15,7 +15,7 @@ export const Input = (props: InputProps) => {
   const { type = 'text', id, label, error, ...rest } = props;
 
   return (
-    <div className='mb-4'>
+    <div className='mb-4 w-full'>
       <div className='relative z-0'>
         <input
           type={type}
