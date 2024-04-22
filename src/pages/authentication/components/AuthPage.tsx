@@ -27,9 +27,12 @@ export const AuthPage: FC<AuthPageProps> = ({ src, srcSet, className, children }
       <div className='flex h-screen w-screen flex-col md:h-screen md:flex-row'>
         {/* Left Section */}
         <div className='flex h-2/5 w-full flex-col content-center bg-secondary md:h-full lg:h-full dark:bg-secondary-dark'>
-          <h1 className='mx-auto my-2 text-2xl font-normal md:my-4 md:text-3xl'>
-            {common.appName}
-          </h1>
+          <div className='flex items-center justify-center'>
+            <img src='public/logo.svg' className='size-8 md:size-10' />
+            <h1 className='my-2 ml-2 inline text-2xl font-normal md:my-4 md:text-3xl'>
+              {common.appName}
+            </h1>
+          </div>
           <img
             src={src}
             srcSet={srcSet}
