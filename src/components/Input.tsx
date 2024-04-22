@@ -38,7 +38,11 @@ export const Input = (props: InputProps) => {
           {label}
         </label>
         {!!error && (
-          <p id='standard_error_help' className='text-xs text-error dark:text-error-dark'>
+          <p
+            className='animate-fadeInDown text-xs text-error
+            transition-all 
+            duration-500 dark:text-error-dark'
+          >
             {error}
           </p>
         )}

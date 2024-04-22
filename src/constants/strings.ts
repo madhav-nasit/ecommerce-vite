@@ -2,6 +2,27 @@ export const strings = {
   common: {
     appName: 'Ecommerce',
   },
+  validation: {
+    email: {
+      required: 'Email is required',
+      invalid: 'Invalid email address',
+    },
+    password: {
+      required: 'Password is required',
+      length:
+        'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.',
+      lowercase: 'Password must contain at least one lowercase letter',
+      uppercase: 'Password must contain at least one uppercase letter',
+      number: 'Password must contain at least one number',
+      special: 'Password must contain at least one special character',
+      confirmPassword: 'Please confirm your password',
+      doNotMatch: 'Passwords do not match',
+    },
+    name: {
+      firstName: 'First name is required',
+      lastName: 'Last name is required',
+    },
+  },
   auth: {
     common: {
       emailAddress: 'Email Address',

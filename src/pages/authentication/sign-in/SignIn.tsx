@@ -1,7 +1,17 @@
 import { FC } from 'react';
-import { Button, Input } from '../../../components';
-import { strings } from '../../../constants';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { AuthPage } from '../components';
+import { Button, Input } from '../../../components';
+import { schema, strings } from '../../../constants';
+
+/**
+ * Yup schema for sign-in page
+ */
+const SignInSchema = Yup.object().shape({
+  email: schema.email,
+  password: schema.password,
+});
 
 /**
  * SignIn Component
@@ -15,6 +25,17 @@ export const SignIn: FC = () => {
     auth: { common, signIn, signUp },
   } = strings;
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: SignInSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   return (
     <AuthPage
       src='src/assets/iphone.png'
@@ -25,17 +46,36 @@ export const SignIn: FC = () => {
         <h1 className='mb-4 text-3xl font-normal'>{signIn.title}</h1>
         <p className='mb-4 text-sm text-light'>
           {`${signIn.dontHaveAccount} `}
-          <a className='hover:text-button-hover cursor-pointer font-semibold text-color'>
+          <a className='cursor-pointer font-semibold text-color hover:text-button-hover'>
             {signUp.title}
           </a>
         </p>
 
         {/* Email and password input fields */}
-        <Input id='email' label={common.emailAddress} />
-        <Input id='password' type='password' label={common.password} />
+        <Input
+          id='email'
+          label={common.emailAddress}
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          error={formik.errors.email}
+          required
+        />
+        <Input
+          id='password'
+          type='password'
+          label={common.password}
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          error={formik.errors.password}
+          required
+        />
 
         {/* Sign-in button */}
-        <Button title={signIn.title} className='mt-2 w-full' />
+        <Button
+          title={signIn.title}
+          className='mt-2 w-full'
+          onClick={() => formik.handleSubmit()}
+        />
       </div>
     </AuthPage>
   );
