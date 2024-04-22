@@ -3,7 +3,7 @@ import { strings } from './strings';
 
 // Destructure error messages from strings module
 const {
-  validation: { email, password },
+  validation: { email, password, name },
 } = strings;
 
 // Define Yup schema for validation
@@ -16,4 +16,9 @@ export const schema = {
     .matches(/^(?=.*[A-Z])/, password.uppercase)
     .matches(/^(?=.*[0-9])/, password.number)
     .matches(/^(?=.*[!@#\$%\^&\*])/, password.special),
+  firstName: Yup.string().required(name.firstName),
+  lastName: Yup.string().required(name.lastName),
+  confirmPassword: Yup.string()
+    .required(password.confirmPassword)
+    .oneOf([Yup.ref('password')], password.doNotMatch),
 };

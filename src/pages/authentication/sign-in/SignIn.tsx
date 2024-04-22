@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import { useFormik } from 'formik';
-import { Button, Input } from '../../../components';
-import { strings } from '../../../constants';
-import { AuthPage } from '../components';
 import * as Yup from 'yup';
-import { schema } from '../../../constants/schema';
+import { AuthPage } from '../components';
+import { Button, Input } from '../../../components';
+import { schema, strings } from '../../../constants';
 
 /**
  * Yup schema for sign-in page

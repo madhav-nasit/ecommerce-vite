@@ -15,6 +15,12 @@ export const strings = {
       uppercase: 'Password must contain at least one uppercase letter',
       number: 'Password must contain at least one number',
       special: 'Password must contain at least one special character',
+      confirmPassword: 'Please confirm your password',
+      doNotMatch: 'Passwords do not match',
+    },
+    name: {
+      firstName: 'First name is required',
+      lastName: 'Last name is required',
     },
   },
   auth: {
