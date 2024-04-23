@@ -30,7 +30,7 @@ export const Input = (props: InputProps) => {
         />
         <label
           htmlFor={id}
-          className={`absolute top-4 z-10 origin-[0] -translate-y-5 scale-75 transform text-sm text-light duration-300 after:text-error peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-required:after:ml-0.5 peer-required:after:content-['*'] peer-focus:start-0 peer-focus:-translate-y-5 peer-focus:scale-75 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-light-dark ${
+          className={`absolute top-4 z-10 origin-[0] -translate-y-5 scale-75 transform text-sm text-light duration-300 after:text-error peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-autofill:-translate-y-5 peer-autofill:scale-75 peer-required:after:ml-0.5 peer-required:after:content-['*'] peer-focus:start-0 peer-focus:-translate-y-5 peer-focus:scale-75 rtl:peer-autofill:left-auto rtl:peer-autofill:translate-x-1/4 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-light-dark ${
             !!error ? 'text-error dark:text-error-dark' : ''
           }
           `}
