@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { routes } from 'constants';
+import { NavBar } from 'pages';
 
 interface PrivateRoutesProps {
   isAuthenticated: boolean;
@@ -17,5 +18,10 @@ export const PrivateRoute: FC<PrivateRoutesProps> = ({ isAuthenticated }) => {
   if (!isAuthenticated) return <Navigate to={routes.signIn} />;
 
   // If authenticated, render the nested routes
-  return <Outlet />;
+  return (
+    <div>
+      <NavBar />
+      <Outlet />
+    </div>
+  );
 };
