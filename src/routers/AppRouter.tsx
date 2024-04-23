@@ -5,11 +5,10 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import { ErrorPage, Home, SignIn, SignUp } from 'pages';
+import { ErrorPage, Home, PrivacyPolicy, SignIn, SignUp, TermsOfUse } from 'pages';
 import { routes } from 'constants';
 import { useAuthContext } from 'hooks';
-import { PrivateRoute } from 'routers/PrivateRoute';
-import { PublicRoutes } from 'routers/PublicRoutes';
+import { PrivateRoute, PublicRoutes, PolicyRoutes } from 'routers';
 
 /**
  * AppRouter component manages the routing configuration of the application.
@@ -34,6 +33,10 @@ export const AppRouter: FC = () => {
         <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>
           <Route path={routes.signIn} element={<SignIn />} />
           <Route path={routes.signUp} element={<SignUp />} />
+        </Route>
+        <Route element={<PolicyRoutes isAuthenticated={isAuthenticated} />}>
+          <Route path={routes.termsCondition} element={<TermsOfUse />} />
+          <Route path={routes.privacyPolicy} element={<PrivacyPolicy />} />
         </Route>
       </Route>,
     ),

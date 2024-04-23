@@ -26,6 +26,7 @@ export const strings = {
       firstName: 'First name is required',
       lastName: 'Last name is required',
     },
+    acceptTerms: 'Please accept terms of use and privacy policy.',
   },
   auth: {
     common: {
@@ -34,6 +35,10 @@ export const strings = {
       confirmPassword: 'Confirm Password',
       fName: 'First Name',
       lName: 'Last Name',
+      and: 'and',
+      iAccept: 'I accept the',
+      termsOfUse: 'terms of use',
+      privacyPolicy: 'privacy policy',
     },
     signIn: {
       title: 'Sign In',
@@ -47,6 +52,8 @@ export const strings = {
   primary: {
     common: {
       signOut: 'Sign Out',
+      termsOfUse: 'Terms of Use',
+      privacyPolicy: 'Privacy Policy',
     },
     home: {
       title: 'Home',

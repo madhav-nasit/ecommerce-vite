@@ -2,8 +2,8 @@ import { FC, useLayoutEffect } from 'react';
 import { useFormik } from 'formik';
 import { Link, useOutletContext } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Button, Input } from 'components';
-import { schema, strings } from 'constants';
+import { Button, Checkbox, Input } from 'components';
+import { routes, schema, strings } from 'constants';
 import { AuthPageContext } from 'pages';
 
 /**
@@ -15,6 +15,7 @@ const SignUpSchema = Yup.object().shape({
   firstName: schema.firstName, // Validation schema for first name
   lastName: schema.lastName, // Validation schema for last name
   confirmPassword: schema.confirmPassword, // Validation schema for password confirmation
+  acceptTerms: schema.acceptTerms,
 });
 
 /**
@@ -48,6 +49,7 @@ export const SignUp: FC = () => {
       firstName: '',
       lastName: '',
       confirmPassword: '',
+      acceptTerms: false,
     },
     validationSchema: SignUpSchema,
     onSubmit: (values) => {
@@ -122,6 +124,32 @@ export const SignUp: FC = () => {
         error={formik.errors.confirmPassword}
         required
       />
+
+      {/* Accepts terms of use and privacy policy */}
+      <Checkbox
+        id='acceptTerms'
+        checked={formik.values.acceptTerms}
+        onChange={formik.handleChange}
+        error={formik.errors?.acceptTerms}
+      >
+        <label htmlFor='acceptTerms' className='ms-2 text-sm text-light dark:text-light-dark'>
+          {common.iAccept}{' '}
+          <Link
+            to={routes.termsCondition}
+            className='font-medium text-color underline dark:text-color-dark'
+          >
+            {common.termsOfUse}
+          </Link>{' '}
+          {common.and}{' '}
+          <Link
+            to={routes.privacyPolicy}
+            className='font-medium text-color underline dark:text-color-dark'
+          >
+            {common.privacyPolicy}
+          </Link>
+          .
+        </label>
+      </Checkbox>
 
       {/* Sign-up button */}
       <Button title={signUp.title} className='mt-2 w-full' onClick={() => formik.handleSubmit()} />
