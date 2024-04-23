@@ -12,6 +12,10 @@
   h3 {
     @apply text-lg font-medium;
   }
+
+  body {
+    @apply bg-background text-color dark:bg-background-dark dark:text-color-dark;
+  }
 }
 
 @tailwind components;

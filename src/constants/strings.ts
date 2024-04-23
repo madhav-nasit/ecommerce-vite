@@ -44,4 +44,12 @@ export const strings = {
       alreadyHaveAccount: 'Already have an account?',
     },
   },
+  primary: {
+    common: {
+      signOut: 'Sign Out',
+    },
+    home: {
+      title: 'Home',
+    },
+  },
 };
