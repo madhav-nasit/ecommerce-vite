@@ -14,7 +14,7 @@ export const NavBar = () => {
   // Constants for string literals
   const {
     common,
-    primary: { home },
+    primary: { home, common: homeCommon },
   } = strings;
 
   /** Function to toggle the visibility of the menu */
@@ -52,6 +52,8 @@ export const NavBar = () => {
     >
       <ul className='mt-4 flex flex-col rounded-lg border border-border bg-secondary p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-background md:p-0 rtl:space-x-reverse dark:border-border-dark dark:bg-secondary-dark md:dark:bg-background-dark'>
         <MenuItem href={routes.root}>{home.title}</MenuItem>
+        <MenuItem href={routes.termsCondition}>{homeCommon.termsOfUse}</MenuItem>
+        <MenuItem href={routes.privacyPolicy}>{homeCommon.privacyPolicy}</MenuItem>
       </ul>
     </div>
   );

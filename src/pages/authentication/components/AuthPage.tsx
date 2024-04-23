@@ -31,7 +31,7 @@ export const AuthPage: FC<AuthPageProps> = ({ className }) => {
 
   return (
     <div className='h-screen bg-background dark:bg-background-dark'>
-      <div className='flex h-screen w-screen flex-col md:h-screen md:flex-row'>
+      <div className='relative flex h-screen w-screen flex-col md:h-screen md:flex-row'>
         {/* Left Section */}
         <div className='flex h-2/5 w-full flex-col content-center bg-secondary md:h-full lg:h-full dark:bg-secondary-dark'>
           <div className='flex items-center justify-center'>
@@ -54,8 +54,8 @@ export const AuthPage: FC<AuthPageProps> = ({ className }) => {
         <div className={`flex w-full justify-center p-8 md:my-auto ${className}`}>
           <Outlet context={{ setImageAssets }} />
         </div>
+        <ThemeToggle className='absolute right-2 top-1 md:top-2 lg:right-4 lg:top-4' />
       </div>
-      <ThemeToggle className='fixed right-2 top-1 md:top-2 lg:right-4 lg:top-4' />
     </div>
   );
 };
