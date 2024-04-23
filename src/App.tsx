@@ -1,3 +1,5 @@
+import { AppRouter } from './routers';
+import { AuthProvider } from './contexts';
 import './App.css';
 
 /**
@@ -6,9 +8,9 @@ import './App.css';
  */
 const App = () => {
   return (
-    <div>
-      <h1 className='text-3xl font-bold underline'>Hello world!</h1>
-    </div>
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
   );
 };
 

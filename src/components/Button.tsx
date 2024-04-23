@@ -12,7 +12,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: FC<ButtonProps> = ({ title, className, ...rest }) => {
   return (
     <button
-      className={`font-regular bg-button hover:bg-button-hover rounded px-4 py-2 text-background ${className}`}
+      type='button'
+      className={`font-regular rounded bg-button px-4 py-2 text-background hover:bg-button-hover ${className}`}
       {...rest}
     >
       {title}

@@ -1,6 +1,10 @@
 export const strings = {
   common: {
     appName: 'Ecommerce',
+    oops: 'Oops!',
+    notFound: 'Error 404: Page not found',
+    goBack: 'Go back',
+    genericErrorMessage: 'An unexpected error occurred.',
   },
   validation: {
     email: {
