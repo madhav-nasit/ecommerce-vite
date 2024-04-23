@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { strings } from 'constants';
+import { ThemeToggle } from 'components';
 
 interface AuthPageProps {
   className?: string;
@@ -34,7 +35,7 @@ export const AuthPage: FC<AuthPageProps> = ({ className }) => {
         {/* Left Section */}
         <div className='flex h-2/5 w-full flex-col content-center bg-secondary md:h-full lg:h-full dark:bg-secondary-dark'>
           <div className='flex items-center justify-center'>
-            <img src='/logo.svg' className='size-8 md:size-10' />
+            <img src='/logo.svg' className='size-10' />
             <h1 className='my-2 ml-2 inline text-2xl font-normal md:my-4 md:text-3xl'>
               {common.appName}
             </h1>
@@ -54,6 +55,7 @@ export const AuthPage: FC<AuthPageProps> = ({ className }) => {
           <Outlet context={{ setImageAssets }} />
         </div>
       </div>
+      <ThemeToggle className='fixed right-2 top-1 md:top-2 lg:right-4 lg:top-4' />
     </div>
   );
 };

@@ -41,7 +41,7 @@ export const ProfileMenu = () => {
   const renderProfileButton = () => (
     <button
       type='button'
-      className='flex rounded-full bg-card-dark p-2 text-sm font-medium text-color-dark focus:ring-4 focus:ring-border md:me-0 dark:focus:ring-2 dark:focus:ring-border-dark'
+      className='flex size-10 items-center justify-center rounded-full border border-border bg-secondary-dark text-sm font-medium text-color-dark focus:ring-4 focus:ring-border md:me-0 dark:border-border-dark dark:focus:ring-2 dark:focus:ring-border-dark'
       id='user-menu-button'
       aria-expanded='false'
       data-dropdown-toggle='user-dropdown'
@@ -60,7 +60,7 @@ export const ProfileMenu = () => {
    */
   const renderProfileMenu = () => (
     <div
-      className={`${menuVisible ? 'block' : 'hidden'} absolute -right-10 z-50 my-2 list-none divide-y divide-border rounded-lg bg-card text-base shadow md:right-0 dark:divide-border-dark dark:bg-card-dark`}
+      className={`${menuVisible ? 'block' : 'hidden'} absolute -right-10 z-50 my-2 list-none divide-y divide-border rounded-lg bg-secondary text-base shadow md:right-0 dark:divide-border-dark dark:bg-secondary-dark`}
       id='user-dropdown'
     >
       <div className='px-4 py-3'>
