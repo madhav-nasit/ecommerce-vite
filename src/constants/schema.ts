@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { strings } from './strings';
+import { strings } from 'constants';
 
 // Destructure error messages from strings module
 const {

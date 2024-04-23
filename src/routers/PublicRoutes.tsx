@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { routes } from '../constants';
-import { AuthPage } from '../pages/authentication/components';
+import { routes } from 'constants';
+import { AuthPage } from 'pages';
 
 interface PublicRoutesProps {
   isAuthenticated: boolean;

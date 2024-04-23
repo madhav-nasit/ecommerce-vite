@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useLocalStorage } from './useLocalStorage';
-import { User } from '../types';
+import { useLocalStorage } from 'hooks';
+import { User } from 'types';
 
 /**
  * A custom hook for managing user authentication state and persisting user data.

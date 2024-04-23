@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { useAuthUser } from '../hooks/useAuth';
-import { User } from '../types';
+import { useAuthUser } from 'hooks';
+import { User } from 'types';
 
 /**
  * Represents the authentication context, including the current user,

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { useRouteError, useNavigate } from 'react-router-dom';
-import { Button } from '../../components';
-import { routes, strings } from '../../constants';
-import { NotFound } from '../../assets/svgs';
+import { Button } from 'components';
+import { routes, strings } from 'constants';
+import { NotFound } from 'assets/svgs';
 
 /**
  * ErrorPage component renders an error page with a relevant error message

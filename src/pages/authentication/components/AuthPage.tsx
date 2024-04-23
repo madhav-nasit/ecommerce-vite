@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { strings } from '../../../constants';
+import { strings } from 'constants';
 
 interface AuthPageProps {
   className?: string;

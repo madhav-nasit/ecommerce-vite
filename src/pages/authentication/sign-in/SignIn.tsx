@@ -2,10 +2,10 @@ import { FC, useLayoutEffect } from 'react';
 import { useFormik } from 'formik';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import * as Yup from 'yup';
-import { AuthPageContext } from '../components';
-import { Button, Input } from '../../../components';
-import { routes, schema, strings } from '../../../constants';
-import { useAuthContext } from '../../../hooks';
+import { Button, Input } from 'components';
+import { routes, schema, strings } from 'constants';
+import { useAuthContext } from 'hooks';
+import { AuthPageContext } from 'pages';
 
 /**
  * Yup schema for sign-in page validation

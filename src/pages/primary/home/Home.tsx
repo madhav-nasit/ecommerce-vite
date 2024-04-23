@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../../components';
-import { routes } from '../../../constants';
-import { useAuthContext } from '../../../hooks';
+import { Button } from 'components';
+import { routes } from 'constants';
+import { useAuthContext } from 'hooks';
 
 /**
  * Home Component
