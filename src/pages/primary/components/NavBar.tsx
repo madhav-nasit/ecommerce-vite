@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { MenuIcon } from 'assets/svgs';
+import { ThemeToggle } from 'components';
 import { routes, strings } from 'constants';
-import { MenuItem } from 'pages';
-import { ProfileMenu } from './ProfileMenu';
+import { MenuItem, ProfileMenu } from 'pages';
 
 /**
  * Navigation bar component for the application.
@@ -35,7 +35,7 @@ export const NavBar = () => {
     <button
       data-collapse-toggle='navbar-default'
       type='button'
-      className='group inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-light focus:outline-none focus:ring-2 focus:ring-border md:hidden dark:text-light-dark dark:focus:ring-border-dark'
+      className='group inline-flex size-10 items-center justify-center rounded-lg p-2 text-sm text-light focus:outline-none focus:ring-2 focus:ring-border md:hidden dark:text-light-dark dark:focus:ring-border-dark'
       aria-controls='navbar-default'
       aria-expanded='false'
       onClick={toggleMenu}
@@ -50,10 +50,8 @@ export const NavBar = () => {
       className={`${menuVisible ? 'block' : 'hidden'} w-full md:block md:w-auto`}
       id='navbar-default'
     >
-      <ul className='mt-4 flex flex-col rounded-lg border border-border bg-card p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-background md:p-0 rtl:space-x-reverse dark:border-border-dark dark:bg-card-dark md:dark:bg-background-dark'>
+      <ul className='mt-4 flex flex-col rounded-lg border border-border bg-secondary p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-background md:p-0 rtl:space-x-reverse dark:border-border-dark dark:bg-secondary-dark md:dark:bg-background-dark'>
         <MenuItem href={routes.root}>{home.title}</MenuItem>
-        <MenuItem href={'#'}>{home.title}</MenuItem>
-        {/* Add more menu items here if needed */}
       </ul>
     </div>
   );
@@ -62,7 +60,8 @@ export const NavBar = () => {
     <nav className='fixed start-0 top-0 z-20 w-full border-b border-border bg-background dark:border-border-dark dark:bg-background-dark'>
       <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
         {renderHeader()}
-        <div className='flex items-center space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse'>
+        <div className='flex items-center space-x-3 md:order-2 rtl:space-x-reverse'>
+          <ThemeToggle />
           <ProfileMenu />
           {renderMenuButton()}
         </div>

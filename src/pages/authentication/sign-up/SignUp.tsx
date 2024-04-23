@@ -59,11 +59,11 @@ export const SignUp: FC = () => {
     <div className='w-full md:max-w-md'>
       {/* Heading section */}
       <h1 className='mb-4 text-2xl font-normal md:text-3xl'>{signUp.title}</h1>
-      <p className='mb-4 text-sm text-light'>
+      <p className='mb-4 text-sm text-light dark:text-light-dark'>
         {`${signUp.alreadyHaveAccount} `}
         {/* Link to sign-in page */}
         <Link
-          className='cursor-pointer font-semibold text-color hover:text-button-hover'
+          className='dark:hover:text-hover cursor-pointer font-semibold text-color hover:text-button-hover dark:text-color-dark'
           to={`/signin`}
           replace
         >

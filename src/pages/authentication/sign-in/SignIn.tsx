@@ -65,11 +65,11 @@ export const SignIn: FC = () => {
     <div className='w-full md:max-w-md'>
       {/* Heading section */}
       <h1 className='mb-4 text-3xl font-normal'>{signIn.title}</h1>
-      <p className='mb-4 text-sm text-light'>
+      <p className='mb-4 text-sm text-light dark:text-light-dark'>
         {`${signIn.dontHaveAccount} `}
         {/* Link to sign-up page */}
         <Link
-          className='cursor-pointer font-semibold text-color hover:text-button-hover'
+          className='dark:hover:text-hover cursor-pointer font-semibold text-color hover:text-button-hover dark:text-color-dark'
           to={routes.signUp}
           replace
         >
