@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { routes } from '../constants';
+import { routes } from 'constants';
 
 interface PrivateRoutesProps {
   isAuthenticated: boolean;

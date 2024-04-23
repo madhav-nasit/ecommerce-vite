@@ -1,6 +1,6 @@
-import { AppRouter } from './routers';
-import { AuthProvider } from './contexts';
-import './App.css';
+import { AppRouter } from 'routers';
+import { AuthProvider } from 'contexts';
+import 'src/App.css';
 
 /**
  * App.tsx
