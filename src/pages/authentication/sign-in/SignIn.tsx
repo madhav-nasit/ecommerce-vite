@@ -69,7 +69,7 @@ export const SignIn: FC = () => {
         {`${signIn.dontHaveAccount} `}
         {/* Link to sign-up page */}
         <Link
-          className='dark:hover:text-hover cursor-pointer font-semibold text-color hover:text-button-hover dark:text-color-dark'
+          className='cursor-pointer font-semibold text-color hover:text-button-hover dark:text-color-dark dark:hover:text-hover'
           to={routes.signUp}
           replace
         >

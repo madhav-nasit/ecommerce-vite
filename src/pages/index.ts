@@ -4,5 +4,6 @@ export * from './authentication/sign-up/SignUp';
 export * from './error-page/ErrorPage';
 export * from './primary/components';
 export * from './primary/home/Home';
-export * from './primary/terms-of-use/TermsOfUse';
-export * from './primary/privacy-policy/PrivacyPolicy';
+export * from './primary/home/components';
+export * from './terms-of-use/TermsOfUse';
+export * from './privacy-policy/PrivacyPolicy';

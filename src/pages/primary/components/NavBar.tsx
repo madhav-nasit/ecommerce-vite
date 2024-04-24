@@ -24,7 +24,7 @@ export const NavBar = () => {
   const renderHeader = () => (
     <a href={routes.root} className='flex items-center space-x-3 rtl:space-x-reverse'>
       <img src='/logo.svg' className='size-8 h-8 md:size-10' alt='App logo' />
-      <span className='self-center whitespace-nowrap text-2xl font-semibold text-color dark:text-color-dark'>
+      <span className='self-center whitespace-nowrap text-xl font-semibold text-color md:text-2xl dark:text-color-dark'>
         {common.appName}
       </span>
     </a>
@@ -35,7 +35,7 @@ export const NavBar = () => {
     <button
       data-collapse-toggle='navbar-default'
       type='button'
-      className='group inline-flex size-10 items-center justify-center rounded-lg p-2 text-sm text-light focus:outline-none focus:ring-2 focus:ring-border md:hidden dark:text-light-dark dark:focus:ring-border-dark'
+      className='group inline-flex size-8 items-center justify-center rounded-lg p-1 text-sm text-light focus:outline-none focus:ring-2 focus:ring-border md:hidden md:size-10 md:p-2 dark:text-light-dark dark:focus:ring-border-dark'
       aria-controls='navbar-default'
       aria-expanded='false'
       onClick={toggleMenu}
@@ -60,9 +60,9 @@ export const NavBar = () => {
 
   return (
     <nav className='fixed start-0 top-0 z-20 w-full border-b border-border bg-background dark:border-border-dark dark:bg-background-dark'>
-      <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
+      <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-2 md:p-4'>
         {renderHeader()}
-        <div className='flex items-center space-x-3 md:order-2 rtl:space-x-reverse'>
+        <div className='flex items-center space-x-2 md:order-2 md:space-x-3 rtl:space-x-reverse'>
           <ThemeToggle />
           <ProfileMenu />
           {renderMenuButton()}

@@ -34,7 +34,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = (props) => {
   return (
     <button
       type='button'
-      className={` hover:bg-hover dark:hover:bg-hover-dark z-50 flex size-10 flex-col items-center justify-center rounded-full border border-border bg-secondary dark:border-border-dark dark:bg-secondary-dark ${className}`}
+      className={`z-50 flex size-8 flex-col items-center justify-center rounded-full border border-border bg-secondary hover:scale-110 hover:bg-hover md:size-10 dark:border-border-dark dark:bg-secondary-dark dark:hover:bg-hover-dark ${className}`}
       onClick={toggleTheme}
       {...rest}
     >
