@@ -28,6 +28,7 @@ export const AppRouter: FC = () => {
         {/* Private Route for authenticated users */}
         <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
           <Route index element={<Home />} />
+          <Route path={'/:categoryName'} element={<Home />} />
         </Route>
         {/* Auth page route */}
         <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>
