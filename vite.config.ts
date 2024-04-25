@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       src: '/src',
+      api: '/src/api',
       assets: '/src/assets',
       components: '/src/components',
       constants: '/src/constants',
@@ -15,6 +16,7 @@ export default defineConfig({
       pages: '/src/pages',
       routers: '/src/routers',
       types: '/src/types',
+      utils: '/src/utils',
     },
   },
 });

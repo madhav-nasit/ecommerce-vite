@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import { useLocalStorage } from 'hooks';
+import { useTheme } from 'hooks';
 import { DarkMode, LightMode } from 'assets/svgs';
 
 /**
@@ -13,23 +13,8 @@ interface ThemeToggleProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
  */
 export const ThemeToggle: React.FC<ThemeToggleProps> = (props) => {
   const { className, ...rest } = props;
-  const { setItem, getItem } = useLocalStorage();
 
-  /**
-   * Toggles between light and dark themes.
-   */
-  const toggleTheme = () => {
-    // Get the current theme from localStorage or default to 'light'
-    const currentTheme = getItem('color-theme') || 'light';
-
-    // Determine the next theme
-    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-    // Toggle the class on documentElement
-    document.documentElement.classList.toggle('dark', nextTheme === 'dark');
-    // Store the next theme in localStorage
-    setItem('color-theme', nextTheme);
-  };
+  const { toggleTheme } = useTheme();
 
   return (
     <button
