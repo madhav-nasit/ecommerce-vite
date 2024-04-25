@@ -5,7 +5,16 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import { ErrorPage, Home, PrivacyPolicy, SignIn, SignUp, TermsOfUse } from 'pages';
+import {
+  Cart,
+  ErrorPage,
+  Home,
+  PrivacyPolicy,
+  ProductDetails,
+  SignIn,
+  SignUp,
+  TermsOfUse,
+} from 'pages';
 import { routes } from 'constants';
 import { useAuthContext } from 'hooks';
 import { PrivateRoute, PublicRoutes, PolicyRoutes } from 'routers';
@@ -29,6 +38,9 @@ export const AppRouter: FC = () => {
         <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
           <Route index element={<Home />} />
           <Route path={'/:categoryName'} element={<Home />} />
+          <Route path={'/:categoryName/:page'} element={<Home />} />
+          <Route path={`${routes.products}/:productId`} element={<ProductDetails />} />
+          <Route path={`${routes.cart}`} element={<Cart />} />
         </Route>
         {/* Auth page route */}
         <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>

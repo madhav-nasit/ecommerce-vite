@@ -7,3 +7,5 @@ export * from './primary/home/Home';
 export * from './primary/home/components';
 export * from './terms-of-use/TermsOfUse';
 export * from './privacy-policy/PrivacyPolicy';
+export * from './primary/product-details/ProductDetails';
+export * from './primary/cart/Cart';

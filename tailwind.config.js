@@ -15,7 +15,7 @@ export default {
         'button-hover': '#353935',
         light: '#6C7275',
         error: '#FF5630',
-        success: '38CB89',
+        success: '#38CB89',
         border: ' #E8ECEF',
         'primary-dark': '#0D0E10',
         'background-dark': '#1C1F24',

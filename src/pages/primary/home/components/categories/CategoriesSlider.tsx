@@ -99,7 +99,7 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
     }
   };
   return (
-    <div className='relative overflow-hidden rounded'>
+    <div className='sticky top-0 z-40 overflow-hidden border-b border-border bg-background shadow dark:border-border-dark dark:bg-background-dark'>
       <div
         ref={containerRef}
         className='no-scrollbar mx-0 flex snap-x items-center space-x-2 overflow-x-auto py-4 md:mx-4 md:space-x-4'
