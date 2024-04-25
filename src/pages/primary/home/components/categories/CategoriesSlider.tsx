@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { categories, routes } from 'constants';
+import { routes } from 'constants';
 import { CategoryItem, ScrollButton } from 'pages';
 
 interface CategoriesSlider {
+  categories: string[] | undefined;
   categoryName: string;
 }
 
 export const CategoriesSlider = (props: CategoriesSlider) => {
   // Deconstruct props
-  const { categoryName } = props;
+  const { categoryName, categories } = props;
 
   // Navigation hook
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
       const scrollPos = container.scrollLeft;
       const maxScroll = container.scrollWidth - container.clientWidth;
       setHideLeftIcon(scrollPos <= 0);
-      setHideRightIcon(scrollPos >= maxScroll);
+      setHideRightIcon(Math.ceil(scrollPos) >= maxScroll);
     }
   };
 
@@ -83,7 +84,7 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
 
   /** Navigate to /category route */
   const onCategoryChange = (category: string) => {
-    if (category === 'All') {
+    if (category === 'all') {
       navigate(routes.root);
     } else {
       navigate('/' + category);
@@ -106,7 +107,7 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
         style={{ scrollSnapType: 'x mandatory' }}
       >
         <ScrollButton direction='left' hide={hideLeftIcon} onClick={scrollLeft} />
-        {categories.map((item, index) => (
+        {categories?.map((item, index) => (
           <CategoryItem
             item={item}
             key={index}

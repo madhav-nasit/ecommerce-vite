@@ -4,6 +4,13 @@ export interface User {
   email: string;
 }
 
+export interface ProductRes {
+  limit: number;
+  skip: number;
+  total: number;
+  products: Product[];
+}
+
 export interface Product {
   id: number;
   title: string;
@@ -27,4 +34,15 @@ export interface Cart {
   discountPercentage: number;
   discountedPrice: number;
   thumbnail: string;
+}
+
+export interface SignInReq {
+  username: string;
+  password: string;
+}
+
+export interface GetProductReq {
+  categoryName?: string;
+  limit?: number;
+  skip?: number;
 }

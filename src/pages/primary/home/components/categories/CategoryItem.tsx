@@ -22,7 +22,7 @@ export const CategoryItem = (props: CategoryItemProps) => {
       `}
       {...rest}
     >
-      <p className='text-sm'>{item}</p>
+      <p className='text-sm capitalize'>{item?.replace('-', ' ')}</p>
     </button>
   );
 };

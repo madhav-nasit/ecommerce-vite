@@ -59,6 +59,7 @@ export const strings = {
       title: 'Home',
       next: 'Next',
       previous: 'Previous',
+      noProduct: 'No product available.',
     },
     productDetails: {
       addToCart: 'Add to Cart',
