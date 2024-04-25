@@ -57,6 +57,21 @@ export const strings = {
     },
     home: {
       title: 'Home',
+      next: 'Next',
+      previous: 'Previous',
+    },
+    productDetails: {
+      addToCart: 'Add to Cart',
+      rating: 'Rating',
+      brand: 'Brand',
+      category: 'Category',
+      stock: 'Stock',
+    },
+    cart: {
+      title: 'Your Cart',
+      price: 'Price',
+      total: 'Total',
+      cartSummary: 'Cart summary',
     },
   },
 };

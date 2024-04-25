@@ -5,7 +5,7 @@ import { FC } from 'react';
  */
 export const TermsOfUse: FC = () => {
   return (
-    <div className='container mx-auto px-4 pb-10 pt-20'>
+    <div className='container mx-auto px-4 pb-10 pt-4'>
       <h1 className='mb-8 text-3xl font-bold'>Terms and Conditions</h1>
       <div className='prose'>
         <h2>1. Introduction</h2>

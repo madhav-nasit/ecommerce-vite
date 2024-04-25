@@ -4,4 +4,6 @@ export const routes = {
   signUp: '/signup',
   termsCondition: '/terms-and-condition',
   privacyPolicy: '/privacy-policy',
+  products: '/products',
+  cart: '/cart',
 };

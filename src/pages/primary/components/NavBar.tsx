@@ -3,19 +3,23 @@ import { MenuIcon } from 'assets/svgs';
 import { ThemeToggle } from 'components';
 import { routes, strings } from 'constants';
 import { MenuItem, ProfileMenu } from 'pages';
+import { useLocation } from 'react-router-dom';
 
 /**
  * Navigation bar component for the application.
  */
 export const NavBar = () => {
-  // State for controlling the visibility of the menu
-  const [menuVisible, setMenuVisible] = useState(false);
-
   // Constants for string literals
   const {
     common,
     primary: { home, common: homeCommon },
   } = strings;
+
+  // Returns the current location object, which represents the current URL in web browsers.
+  const location = useLocation();
+
+  // State for controlling the visibility of the menu
+  const [menuVisible, setMenuVisible] = useState(false);
 
   /** Function to toggle the visibility of the menu */
   const toggleMenu = () => setMenuVisible((prev) => !prev);
@@ -59,7 +63,9 @@ export const NavBar = () => {
   );
 
   return (
-    <nav className='fixed start-0 top-0 z-20 w-full border-b border-border bg-background dark:border-border-dark dark:bg-background-dark'>
+    <nav
+      className={`${location.pathname === '/' ? '' : 'sticky'} start-0 top-0 z-20 w-full border-b border-border bg-background shadow dark:border-border-dark dark:bg-background-dark`}
+    >
       <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-2 md:p-4'>
         {renderHeader()}
         <div className='flex items-center space-x-2 md:order-2 md:space-x-3 rtl:space-x-reverse'>
