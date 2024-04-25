@@ -21,6 +21,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
+      "api": ["./src/api"],
       "assets": ["./src/assets"],
       "assets/*": ["./src/assets/*"],
       "components": ["./src/components"],
@@ -31,6 +32,7 @@
       "routers": ["./src/routers"],
       "routers/*": ["./src/routers/*"],
       "types": ["./src/types"],
+      "utils": ["./src/utils"],
       "src/*": ["./src/*"]
     }
   },
