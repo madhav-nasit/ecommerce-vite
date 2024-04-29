@@ -42,8 +42,8 @@ export const SignIn: FC = () => {
   // Set up image assets on component mount
   useLayoutEffect(() => {
     setImageAssets({
-      src: 'src/assets/iphone.png', // Main image source
-      srcSet: 'src/assets/iphone@2x.png 2x, src/assets/iphone@3x.png 3x', // Image source set for responsive design
+      src: '/iphone.png', // Main image source
+      srcSet: '/iphone@2x.png 2x, /iphone@3x.png 3x', // Image source set for responsive design
     });
   }, []);
 
