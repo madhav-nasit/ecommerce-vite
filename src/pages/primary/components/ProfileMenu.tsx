@@ -51,14 +51,14 @@ export const ProfileMenu = ({ user }: ProfileMenuProps) => {
   const renderProfileButton = () => (
     <button
       type='button'
-      className='flex size-8 items-center justify-center rounded-full border border-border bg-secondary text-sm font-medium text-color-dark hover:bg-hover focus:ring-1 focus:ring-border md:me-0 md:size-10 dark:border-border-dark dark:bg-secondary-dark dark:hover:bg-hover-dark dark:focus:ring-2 dark:focus:ring-border-dark'
+      className='flex size-8 items-center justify-center overflow-hidden rounded-full border border-border bg-secondary text-sm font-medium text-color-dark hover:bg-hover focus:ring-1 focus:ring-border md:me-0 md:size-10 dark:border-border-dark dark:bg-secondary-dark dark:hover:bg-hover-dark dark:focus:ring-2 dark:focus:ring-border-dark'
       id='user-menu-button'
       aria-expanded='false'
       data-dropdown-toggle='user-dropdown'
       data-dropdown-placement='bottom'
       onClick={toggleMenu}
     >
-      <img src={user?.image} className='size-6 object-contain md:size-8' />
+      <img src={user?.image} className='size-8 object-contain md:size-10' />
     </button>
   );
 

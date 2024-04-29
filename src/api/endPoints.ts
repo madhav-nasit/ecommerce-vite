@@ -21,5 +21,9 @@ export const endPoints = {
     productCategory: '/products/category',
     /** Get cart of the user */
     cart: 'carts/user',
+    /** Add to cart */
+    addCart: 'carts/add',
+    /** Update cart */
+    carts: '/carts',
   },
 };

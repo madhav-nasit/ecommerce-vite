@@ -5,3 +5,4 @@ export * from './CheckBox';
 export * from './Spinner';
 export * from './Error';
 export * from './PageWrapper';
+export * from './DeleteConfirm';

@@ -69,6 +69,7 @@ export const strings = {
     },
     productDetails: {
       addToCart: 'Add to Cart',
+      goToCart: 'Go to Cart',
       rating: 'Rating',
       brand: 'Brand',
       category: 'Category',
@@ -81,6 +82,14 @@ export const strings = {
       discount: 'Discount',
       total: 'Total',
       cartSummary: 'Cart summary',
+      noProduct: 'No product available in cart.',
+      removeItem: 'Remove Item',
+      removeItemMsg: 'Are you sure want to delete item from cart?',
+      deleteCart: 'Delete Cart',
+      deleteCartMsg: 'Are you sure want to delete all the cart items?',
+      delete: 'Delete',
+      cancel: 'Cancel',
+      placeOrder: 'Place Order',
     },
   },
   apiErrors: {

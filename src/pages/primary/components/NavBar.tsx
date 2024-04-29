@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { MenuIcon } from 'assets/svgs';
 import { ThemeToggle } from 'components';
 import { routes, strings } from 'constants';
@@ -52,12 +53,12 @@ export const NavBar = ({ sticky = true }: NavBarProps) => {
 
   /** Renders the header section of the navigation bar */
   const renderHeader = () => (
-    <a href={routes.root} className='flex items-center space-x-3 rtl:space-x-reverse'>
+    <Link to={routes.root} className='flex items-center space-x-3 rtl:space-x-reverse'>
       <img src='/logo.svg' className='size-8 h-8 md:size-10' alt='App logo' />
       <span className='hidden self-center whitespace-nowrap text-xl font-semibold text-color md:block md:text-2xl dark:text-color-dark'>
         {common.appName}
       </span>
-    </a>
+    </Link>
   );
 
   /** Renders the menu button */

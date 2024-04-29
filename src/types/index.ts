@@ -76,3 +76,19 @@ export interface Carts {
   totalQuantity: number;
   userId: number;
 }
+
+export interface AddCart {
+  userId: number;
+  products: {
+    id: number;
+    quantity: number;
+  }[];
+}
+
+export interface UpdateCartReq {
+  merge: boolean;
+  products: {
+    id: number;
+    quantity: number;
+  }[];
+}
