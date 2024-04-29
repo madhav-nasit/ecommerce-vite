@@ -44,8 +44,8 @@ export const SignUp: FC = () => {
   // Set up image assets on component mount
   useLayoutEffect(() => {
     setImageAssets({
-      src: 'src/assets/headband.png', // Main image source
-      srcSet: 'src/assets/headband@2x.png 2x, src/assets/headband@3x.png 3x', // Image source set for responsive design
+      src: '/headband.png', // Main image source
+      srcSet: '/headband@2x.png 2x, /headband@3x.png 3x', // Image source set for responsive design
     });
   }, []);
 
@@ -125,6 +125,7 @@ export const SignUp: FC = () => {
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.errors.email}
+        autoComplete='email'
         required
       />
 
@@ -136,6 +137,7 @@ export const SignUp: FC = () => {
         value={formik.values.password}
         onChange={formik.handleChange}
         error={formik.errors.password}
+        autoComplete='new-password'
         required
       />
       <Input
@@ -145,6 +147,7 @@ export const SignUp: FC = () => {
         value={formik.values.confirmPassword}
         onChange={formik.handleChange}
         error={formik.errors.confirmPassword}
+        autoComplete='new-password'
         required
       />
 
