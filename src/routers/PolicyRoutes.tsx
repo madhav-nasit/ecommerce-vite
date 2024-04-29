@@ -19,7 +19,7 @@ export const PolicyRoutes: FC<PolicyRoutesProps> = ({ isAuthenticated }) => {
   // If not authenticated, just show policy page
   if (!isAuthenticated)
     return (
-      <div className='-mt-12'>
+      <div>
         <Outlet />
       </div>
     );
