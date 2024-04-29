@@ -29,6 +29,7 @@
       "contexts": ["./src/contexts"],
       "hooks": ["./src/hooks"],
       "pages": ["./src/pages"],
+      "queries": ["./src/queries"],
       "routers": ["./src/routers"],
       "routers/*": ["./src/routers/*"],
       "types": ["./src/types"],

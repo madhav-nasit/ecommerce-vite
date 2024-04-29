@@ -1,7 +1,12 @@
 export interface User {
+  id: number;
+  username: string;
   firstName: string;
   lastName: string;
   email: string;
+  gender: string;
+  image: string;
+  token?: string;
 }
 
 export interface ProductRes {
@@ -39,6 +44,14 @@ export interface Cart {
 export interface SignInReq {
   username: string;
   password: string;
+}
+
+export interface SignUpReq {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  username: string;
 }
 
 export interface GetProductReq {

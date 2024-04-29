@@ -7,6 +7,9 @@ export const strings = {
     genericErrorMessage: 'An unexpected error occurred.',
   },
   validation: {
+    userName: {
+      required: 'User name is required',
+    },
     email: {
       required: 'Email is required',
       invalid: 'Invalid email address',
@@ -30,6 +33,7 @@ export const strings = {
   },
   auth: {
     common: {
+      userName: 'User Name',
       emailAddress: 'Email Address',
       password: 'Password',
       confirmPassword: 'Confirm Password',
@@ -43,10 +47,12 @@ export const strings = {
     signIn: {
       title: 'Sign In',
       dontHaveAccount: `Don’t have an accout yet?`,
+      signInSuccess: 'Sign In successful!',
     },
     signUp: {
       title: 'Sign Up',
       alreadyHaveAccount: 'Already have an account?',
+      signUpSuccess: 'Sign Up successful!',
     },
   },
   primary: {

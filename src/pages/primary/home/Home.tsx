@@ -1,8 +1,10 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { PageWrapper } from 'components';
 import { strings } from 'constants';
+import { useCategoryQuery, useProductQuery } from 'queries';
+import { PrivateRouteContext } from 'routers';
 import { CategoriesSlider, Pagination, ProductList } from './components';
-import { useCategoryQuery, useProductQuery } from './queries';
 
 /** Max products per page */
 const PRODUCT_LIMIT = 15;
@@ -28,8 +30,16 @@ export const Home = () => {
   // react query hooks to fetch products data
   const { data: productData, isPending, isError } = useProductQuery(categoryName, limit, skip);
 
+  // Outlet context for setting image assets
+  const { setSticky } = useOutletContext<PrivateRouteContext>();
+
   // Error message handling
   const errorMsg = productData && productData?.products?.length === 0 ? home.noProduct : undefined;
+
+  // Disable sticky header
+  useEffect(() => {
+    setSticky(false);
+  }, []);
 
   /** Handle pagination */
   const handlePagination = (page: number) => {

@@ -7,7 +7,7 @@ import 'src/App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Create a client
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 /**
  * App.tsx

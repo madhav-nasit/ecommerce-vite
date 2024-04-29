@@ -103,7 +103,7 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
     <div className='sticky top-0 z-40 overflow-hidden border-b border-border bg-background shadow dark:border-border-dark dark:bg-background-dark'>
       <div
         ref={containerRef}
-        className='no-scrollbar mx-0 flex snap-x items-center space-x-2 overflow-x-auto py-4 md:mx-4 md:space-x-4'
+        className='no-scrollbar z-30 mx-0 flex snap-x items-center space-x-2 overflow-x-auto bg-background py-4 md:mx-4 md:space-x-4 dark:bg-background-dark'
         style={{ scrollSnapType: 'x mandatory' }}
       >
         <ScrollButton direction='left' hide={hideLeftIcon} onClick={scrollLeft} />

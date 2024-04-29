@@ -8,25 +8,25 @@ const { apiErrors } = strings;
  *
  * @param error The API error response.
  */
-export const getGeneralApiProblem = (error: any) => {
+export const getGeneralApiProblem = (error: any, onLogout: () => void) => {
   const { code, response } = error;
 
   // Check if the error code indicates a timeout
   switch (code) {
     case 'ECONNABORTED':
       showErrorToast({ message: apiErrors.requestTimeout });
-      return { status: false, message: apiErrors.requestTimeout };
+      return { success: false, message: apiErrors.requestTimeout };
     // Check if the error code indicates a network error
     case 'ERR_NETWORK':
       showErrorToast({ message: apiErrors.networkError });
-      return { status: false, message: apiErrors.networkError };
+      return { success: false, message: apiErrors.networkError };
     // Check if the error code indicates a canceled request
     case 'ERR_CANCELED':
       showErrorToast({ message: apiErrors.requestCanceled });
-      return { status: false, message: apiErrors.requestCanceled };
+      return { success: false, message: apiErrors.requestCanceled };
     // Handle other error codes
     default:
-      return handleResponseError(response);
+      return handleResponseError(response, onLogout);
   }
 };
 
@@ -35,11 +35,11 @@ export const getGeneralApiProblem = (error: any) => {
  *
  * @param response The API response error.
  */
-const handleResponseError = (response: any) => {
+const handleResponseError = (response: any, onLogout: () => void) => {
   // If there is no response, treat it as an unexpected error
   if (!response) {
     showErrorToast({ message: apiErrors.unexpectedError });
-    return { status: false, message: apiErrors.unexpectedError };
+    return { success: false, message: apiErrors.unexpectedError };
   }
 
   const {
@@ -51,11 +51,12 @@ const handleResponseError = (response: any) => {
   switch (status) {
     // Handle Unauthorized Access (e.g., redirect to login)
     case 401:
-      // TODO: Logout user here
-      showErrorToast({ message: apiErrors.unauthorizedAccess });
+      // Logout user
+      onLogout();
       return {
         ...data,
-        status: false,
+        status,
+        success: false,
         message: apiErrors.unauthorizedAccess,
       };
     // Handle Forbidden Access
@@ -63,7 +64,8 @@ const handleResponseError = (response: any) => {
       showErrorToast({ message: apiErrors.forbiddenAccess });
       return {
         ...data,
-        status: false,
+        status,
+        success: false,
         message: apiErrors.forbiddenAccess,
       };
     // Handle Bad Request with or without a specific error message
@@ -72,14 +74,15 @@ const handleResponseError = (response: any) => {
         message: !!message ? message : apiErrors.badRequest,
       });
       return data?.message
-        ? { ...data, status: false }
-        : { ...data, status: false, message: apiErrors.badRequest };
+        ? { ...data, status, success: false }
+        : { ...data, status, success: false, message: apiErrors.badRequest };
     // Handle Not Found Error
     case 404:
       showErrorToast({ message: apiErrors.resourceNotFound });
       return {
         ...data,
-        status: false,
+        status,
+        success: false,
         message: apiErrors.resourceNotFound,
       };
     // Handle Internal Server Error
@@ -87,7 +90,8 @@ const handleResponseError = (response: any) => {
       showErrorToast({ message: apiErrors.internalServerError });
       return {
         ...data,
-        status: false,
+        status,
+        success: false,
         message: apiErrors.internalServerError,
       };
     // Handle other HTTP errors
@@ -95,7 +99,8 @@ const handleResponseError = (response: any) => {
       showErrorToast({ message: apiErrors.unexpectedError });
       return {
         ...data,
-        status: false,
+        status,
+        success: false,
         message: apiErrors.unexpectedError,
       };
   }

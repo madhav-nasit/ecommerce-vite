@@ -1,10 +1,14 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { routes } from 'constants';
 import { NavBar } from 'pages';
 
 interface PrivateRoutesProps {
   isAuthenticated: boolean;
+}
+
+export interface PrivateRouteContext {
+  setSticky: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 /**
@@ -17,11 +21,14 @@ export const PrivateRoute: FC<PrivateRoutesProps> = ({ isAuthenticated }) => {
   // If not authenticated, redirect to the sign-in page
   if (!isAuthenticated) return <Navigate to={routes.signIn} />;
 
+  // set navbar as sticky top
+  const [sticky, setSticky] = useState<boolean>(true);
+
   // If authenticated, render the nested routes
   return (
-    <div>
-      <NavBar />
-      <Outlet />
+    <div className='h-screen w-screen'>
+      <NavBar sticky={sticky} />
+      <Outlet context={{ setSticky }} />
     </div>
   );
 };

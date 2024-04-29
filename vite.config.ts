@@ -14,6 +14,7 @@ export default defineConfig({
       contexts: '/src/contexts',
       hooks: '/src/hooks',
       pages: '/src/pages',
+      queries: '/src/queries',
       routers: '/src/routers',
       types: '/src/types',
       utils: '/src/utils',

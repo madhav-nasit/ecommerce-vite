@@ -21,7 +21,7 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
   children,
 }) => {
   if (isPending) {
-    return <Spinner />;
+    return <Spinner className='top-20' />;
   } else if (isError) {
     return <Error />;
   } else if (!!emptyMsg) {
