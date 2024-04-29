@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { categories, routes } from 'constants';
+import { routes } from 'constants';
 import { CategoryItem, ScrollButton } from 'pages';
 
 interface CategoriesSlider {
+  categories: string[] | undefined;
   categoryName: string;
 }
 
 export const CategoriesSlider = (props: CategoriesSlider) => {
   // Deconstruct props
-  const { categoryName } = props;
+  const { categoryName, categories } = props;
 
   // Navigation hook
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
       const scrollPos = container.scrollLeft;
       const maxScroll = container.scrollWidth - container.clientWidth;
       setHideLeftIcon(scrollPos <= 0);
-      setHideRightIcon(scrollPos >= maxScroll);
+      setHideRightIcon(Math.ceil(scrollPos) >= maxScroll);
     }
   };
 
@@ -83,7 +84,7 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
 
   /** Navigate to /category route */
   const onCategoryChange = (category: string) => {
-    if (category === 'All') {
+    if (category === 'all') {
       navigate(routes.root);
     } else {
       navigate('/' + category);
@@ -102,11 +103,11 @@ export const CategoriesSlider = (props: CategoriesSlider) => {
     <div className='sticky top-0 z-40 overflow-hidden border-b border-border bg-background shadow dark:border-border-dark dark:bg-background-dark'>
       <div
         ref={containerRef}
-        className='no-scrollbar mx-0 flex snap-x items-center space-x-2 overflow-x-auto py-4 md:mx-4 md:space-x-4'
+        className='no-scrollbar z-30 mx-0 flex snap-x items-center space-x-2 overflow-x-auto bg-background py-4 md:mx-4 md:space-x-4 dark:bg-background-dark'
         style={{ scrollSnapType: 'x mandatory' }}
       >
         <ScrollButton direction='left' hide={hideLeftIcon} onClick={scrollLeft} />
-        {categories.map((item, index) => (
+        {categories?.map((item, index) => (
           <CategoryItem
             item={item}
             key={index}

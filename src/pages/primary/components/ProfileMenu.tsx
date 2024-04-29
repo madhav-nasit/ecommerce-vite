@@ -2,12 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from 'hooks';
 import { routes, strings } from 'constants';
+import { User } from 'types';
+import { queryClient } from 'src/App';
+
+interface ProfileMenuProps {
+  user?: User;
+}
 
 /**
  * ProfileMenu component for displaying user profile menu.
  * It includes a button to toggle the menu and options like logout.
  */
-export const ProfileMenu = () => {
+export const ProfileMenu = ({ user }: ProfileMenuProps) => {
   // Authentication context and navigation hook
   const { logout } = useAuthContext();
   const navigate = useNavigate();
@@ -25,7 +31,11 @@ export const ProfileMenu = () => {
    * It logs out the user and redirects to the sign-in page.
    */
   const onLogout = () => {
+    // Remove user data from AuthContext
     logout();
+    // Invalidate all the queries data
+    queryClient.invalidateQueries();
+    // Navigate to sign-in page
     navigate(routes.signIn, { replace: true });
   };
 
@@ -41,15 +51,14 @@ export const ProfileMenu = () => {
   const renderProfileButton = () => (
     <button
       type='button'
-      className='flex size-8 items-center justify-center rounded-full border border-border bg-secondary-dark text-sm font-medium text-color-dark focus:ring-4 focus:ring-border md:me-0 md:size-10 dark:border-border-dark dark:focus:ring-2 dark:focus:ring-border-dark'
+      className='flex size-8 items-center justify-center overflow-hidden rounded-full border border-border bg-secondary text-sm font-medium text-color-dark hover:bg-hover focus:ring-1 focus:ring-border md:me-0 md:size-10 dark:border-border-dark dark:bg-secondary-dark dark:hover:bg-hover-dark dark:focus:ring-2 dark:focus:ring-border-dark'
       id='user-menu-button'
       aria-expanded='false'
       data-dropdown-toggle='user-dropdown'
       data-dropdown-placement='bottom'
       onClick={toggleMenu}
     >
-      {/* //ToDo: replace this with an icon or user initials */}
-      TN
+      <img src={user?.image} className='size-8 object-contain md:size-10' />
     </button>
   );
 
@@ -64,9 +73,9 @@ export const ProfileMenu = () => {
       id='user-dropdown'
     >
       <div className='px-4 py-3'>
-        <span className='block text-sm text-color dark:text-color-dark'>Test Name</span>
+        <span className='block text-sm text-color dark:text-color-dark'>{`${user?.firstName} ${user?.lastName}`}</span>
         <span className='block truncate text-sm text-light dark:text-light-dark'>
-          test@mail.com
+          {user?.email}
         </span>
       </div>
       <ul className='py-2' aria-labelledby='user-menu-button'>

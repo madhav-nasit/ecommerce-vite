@@ -1,4 +1,4 @@
-import { api } from './api';
-export default api;
+import { useApi } from './api';
+export default useApi;
 export * from './endPoints';
 export * from './apiProblem';

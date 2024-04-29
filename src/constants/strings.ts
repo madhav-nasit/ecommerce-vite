@@ -7,6 +7,9 @@ export const strings = {
     genericErrorMessage: 'An unexpected error occurred.',
   },
   validation: {
+    userName: {
+      required: 'User name is required',
+    },
     email: {
       required: 'Email is required',
       invalid: 'Invalid email address',
@@ -30,6 +33,7 @@ export const strings = {
   },
   auth: {
     common: {
+      userName: 'User Name',
       emailAddress: 'Email Address',
       password: 'Password',
       confirmPassword: 'Confirm Password',
@@ -43,10 +47,12 @@ export const strings = {
     signIn: {
       title: 'Sign In',
       dontHaveAccount: `Don’t have an accout yet?`,
+      signInSuccess: 'Sign In successful!',
     },
     signUp: {
       title: 'Sign Up',
       alreadyHaveAccount: 'Already have an account?',
+      signUpSuccess: 'Sign Up successful!',
     },
   },
   primary: {
@@ -59,9 +65,11 @@ export const strings = {
       title: 'Home',
       next: 'Next',
       previous: 'Previous',
+      noProduct: 'No product available.',
     },
     productDetails: {
       addToCart: 'Add to Cart',
+      goToCart: 'Go to Cart',
       rating: 'Rating',
       brand: 'Brand',
       category: 'Category',
@@ -70,8 +78,18 @@ export const strings = {
     cart: {
       title: 'Your Cart',
       price: 'Price',
+      subTotal: 'Sub Total',
+      discount: 'Discount',
       total: 'Total',
       cartSummary: 'Cart summary',
+      noProduct: 'No product available in cart.',
+      removeItem: 'Remove Item',
+      removeItemMsg: 'Are you sure want to delete item from cart?',
+      deleteCart: 'Delete Cart',
+      deleteCartMsg: 'Are you sure want to delete all the cart items?',
+      delete: 'Delete',
+      cancel: 'Cancel',
+      placeOrder: 'Place Order',
     },
   },
   apiErrors: {

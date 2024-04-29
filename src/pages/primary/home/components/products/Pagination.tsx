@@ -38,6 +38,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     }
   };
 
+  if (totalPages <= 1) return <></>;
   return (
     <div className='my-4 flex justify-center'>
       <nav aria-label='Page navigation example'>

@@ -2,16 +2,18 @@ import { FC, useLayoutEffect } from 'react';
 import { useFormik } from 'formik';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Button, Input } from 'components';
+import { Button, Input, Spinner } from 'components';
 import { routes, schema, strings } from 'constants';
 import { useAuthContext } from 'hooks';
 import { AuthPageContext } from 'pages';
+import { useSignInMutation } from 'queries';
+import { showSuccessToast } from 'utils';
 
 /**
  * Yup schema for sign-in page validation
  */
 const SignInSchema = Yup.object().shape({
-  email: schema.email,
+  userName: schema.userName,
   password: schema.password,
 });
 
@@ -31,6 +33,9 @@ export const SignIn: FC = () => {
   const { login } = useAuthContext(); // Authentication context
   const navigate = useNavigate(); // Navigation hook
 
+  // API call for sign in
+  const { mutateAsync, isPending } = useSignInMutation();
+
   // Outlet context for setting image assets
   const { setImageAssets } = useOutletContext<AuthPageContext>();
 
@@ -45,19 +50,25 @@ export const SignIn: FC = () => {
   // Formik form configuration for sign-in form
   const formik = useFormik({
     initialValues: {
-      email: '',
+      userName: '',
       password: '',
     },
     validationSchema: SignInSchema,
-    onSubmit: (values) => {
-      // Handle form submission
-      login({
-        email: values.email,
-        firstName: 'Test',
-        lastName: 'User',
-      });
-      // Navigate to home page after successful sign-in
-      navigate(routes.root, { replace: true });
+    onSubmit: async (values) => {
+      try {
+        // Handle form submission
+        const user = await mutateAsync({
+          username: values.userName,
+          password: values.password,
+        });
+        if (!!user && user?.token) {
+          formik.resetForm();
+          login({ user, token: user?.token });
+          showSuccessToast({ message: signIn.signInSuccess });
+          // Navigate to home page after successful sign-in
+          navigate(routes.root, { replace: true });
+        }
+      } catch (error) {}
     },
   });
 
@@ -79,11 +90,11 @@ export const SignIn: FC = () => {
 
       {/* Email and password input fields */}
       <Input
-        id='email'
-        label={common.emailAddress}
+        id='userName'
+        label={common.userName}
         onChange={formik.handleChange}
-        value={formik.values.email}
-        error={formik.errors.email}
+        value={formik.values.userName}
+        error={formik.errors.userName}
         required
       />
       <Input
@@ -98,6 +109,7 @@ export const SignIn: FC = () => {
 
       {/* Sign-in button */}
       <Button title={signIn.title} className='mt-2 w-full' onClick={() => formik.handleSubmit()} />
+      {!!isPending && <Spinner />}
     </div>
   );
 };

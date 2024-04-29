@@ -1,10 +1,12 @@
 import { FC, useLayoutEffect } from 'react';
 import { useFormik } from 'formik';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Button, Checkbox, Input } from 'components';
+import { Button, Checkbox, Input, Spinner } from 'components';
 import { routes, schema, strings } from 'constants';
 import { AuthPageContext } from 'pages';
+import { useSignUpMutation } from 'queries';
+import { showSuccessToast } from 'utils';
 
 /**
  * Yup schema for sign-up page validation
@@ -33,6 +35,12 @@ export const SignUp: FC = () => {
   // Hook for setting image assets
   const { setImageAssets } = useOutletContext<AuthPageContext>();
 
+  // Navigation hook
+  const navigate = useNavigate();
+
+  // API call for sign-up
+  const { mutateAsync, isPending } = useSignUpMutation();
+
   // Set up image assets on component mount
   useLayoutEffect(() => {
     setImageAssets({
@@ -52,20 +60,35 @@ export const SignUp: FC = () => {
       acceptTerms: false,
     },
     validationSchema: SignUpSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      // Call signup user api
+      try {
+        await mutateAsync({
+          username: values.firstName,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          password: values.password,
+        });
+        formik.resetForm();
+        // If sign up succeeds, show success message
+        showSuccessToast({ message: signUp.signUpSuccess });
+        navigate(routes.signIn, { replace: true });
+      } catch (error) {
+        // Handle sign up failure
+      }
     },
   });
 
   return (
-    <div className='w-full md:max-w-md'>
+    <div className='w-full p-8 md:max-w-md'>
       {/* Heading section */}
       <h1 className='mb-4 text-2xl font-normal md:text-3xl'>{signUp.title}</h1>
       <p className='mb-4 text-sm text-light dark:text-light-dark'>
         {`${signUp.alreadyHaveAccount} `}
         {/* Link to sign-in page */}
         <Link
-          className='dark:hover:text-hover cursor-pointer font-semibold text-color hover:text-button-hover dark:text-color-dark'
+          className='cursor-pointer font-semibold text-color hover:text-button-hover dark:text-color-dark dark:hover:text-hover'
           to={`/signin`}
           replace
         >
@@ -153,6 +176,7 @@ export const SignUp: FC = () => {
 
       {/* Sign-up button */}
       <Button title={signUp.title} className='mt-2 w-full' onClick={() => formik.handleSubmit()} />
+      {!!isPending && <Spinner />}
     </div>
   );
 };

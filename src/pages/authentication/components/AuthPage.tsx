@@ -51,7 +51,7 @@ export const AuthPage: FC<AuthPageProps> = ({ className }) => {
         </div>
 
         {/* Right Section */}
-        <div className={`flex w-full justify-center p-8 md:my-auto ${className}`}>
+        <div className={`flex w-full justify-center md:my-auto ${className}`}>
           <Outlet context={{ setImageAssets }} />
         </div>
         <ThemeToggle className='absolute right-2 top-1 md:top-2 lg:right-4 lg:top-4' />

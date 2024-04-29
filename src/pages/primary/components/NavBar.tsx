@@ -1,37 +1,64 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { MenuIcon } from 'assets/svgs';
 import { ThemeToggle } from 'components';
 import { routes, strings } from 'constants';
-import { MenuItem, ProfileMenu } from 'pages';
-import { useLocation } from 'react-router-dom';
+import { CartButton, MenuItem, ProfileMenu } from 'pages';
+import { useCartQuery, useUserQuery } from 'queries';
+import { useAuthContext } from 'hooks';
+
+interface NavBarProps {
+  sticky?: boolean;
+}
 
 /**
  * Navigation bar component for the application.
  */
-export const NavBar = () => {
+export const NavBar = ({ sticky = true }: NavBarProps) => {
   // Constants for string literals
   const {
     common,
     primary: { home, common: homeCommon },
   } = strings;
 
-  // Returns the current location object, which represents the current URL in web browsers.
-  const location = useLocation();
-
   // State for controlling the visibility of the menu
   const [menuVisible, setMenuVisible] = useState(false);
+
+  // Functions of Auth Context
+  const { addUser } = useAuthContext();
+
+  // API call to fetch user
+  const { data: userData } = useUserQuery();
+
+  // API call to fetch cart
+  const { data: cartData } = useCartQuery();
+
+  // Return current cart items count
+  const cartCount = useMemo(() => {
+    if (cartData && cartData?.carts?.length > 0) {
+      return cartData?.carts[0]?.totalProducts;
+    }
+    return 0;
+  }, [cartData]);
+
+  // Update user data to the Auth Context
+  useEffect(() => {
+    if (userData) {
+      addUser(userData);
+    }
+  }, [userData]);
 
   /** Function to toggle the visibility of the menu */
   const toggleMenu = () => setMenuVisible((prev) => !prev);
 
   /** Renders the header section of the navigation bar */
   const renderHeader = () => (
-    <a href={routes.root} className='flex items-center space-x-3 rtl:space-x-reverse'>
+    <Link to={routes.root} className='flex items-center space-x-3 rtl:space-x-reverse'>
       <img src='/logo.svg' className='size-8 h-8 md:size-10' alt='App logo' />
-      <span className='self-center whitespace-nowrap text-xl font-semibold text-color md:text-2xl dark:text-color-dark'>
+      <span className='hidden self-center whitespace-nowrap text-xl font-semibold text-color md:block md:text-2xl dark:text-color-dark'>
         {common.appName}
       </span>
-    </a>
+    </Link>
   );
 
   /** Renders the menu button */
@@ -64,13 +91,14 @@ export const NavBar = () => {
 
   return (
     <nav
-      className={`${location.pathname === '/' ? '' : 'sticky'} start-0 top-0 z-20 w-full border-b border-border bg-background shadow dark:border-border-dark dark:bg-background-dark`}
+      className={`${sticky ? 'sticky' : ''} start-0 top-0 z-20 w-full border-b border-border bg-background shadow dark:border-border-dark dark:bg-background-dark`}
     >
       <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-2 md:p-4'>
         {renderHeader()}
         <div className='flex items-center space-x-2 md:order-2 md:space-x-3 rtl:space-x-reverse'>
           <ThemeToggle />
-          <ProfileMenu />
+          <CartButton count={cartCount} />
+          <ProfileMenu user={userData} />
           {renderMenuButton()}
         </div>
         {renderMenu()}

@@ -1,8 +1,8 @@
 import { strings } from 'constants';
-import { Cart } from 'types';
+import { CartItem as CartItemProp } from 'types';
 
 interface CartItemProps {
-  item: Cart;
+  item: CartItemProp;
   handleQuantityChange: (id: number, quantity: number) => void;
   calculateSubtotal: (price: number, quantity: number) => React.ReactNode;
 }
@@ -42,7 +42,7 @@ export const CartItem = ({ item, handleQuantityChange, calculateSubtotal }: Cart
           <button
             onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
             className='size-7 rounded-md bg-button font-bold'
-            disabled={item.quantity === 1}
+            disabled={item.quantity === 0}
           >
             -
           </button>

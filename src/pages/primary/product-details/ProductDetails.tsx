@@ -1,9 +1,12 @@
-import { useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { products, routes, strings } from 'constants';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { routes, strings } from 'constants';
+import { Button, PageWrapper } from 'components';
 import { Product } from 'types';
-import { Button } from 'components';
+import { PrivateRouteContext } from 'routers';
+import { useAddCartMutation, useCartQuery, useProductDetails } from 'queries';
 import { DetailRow } from './components';
+import { useAuthContext } from 'hooks';
 
 /**
  * ProductDetails component displays the details of a specific product.
@@ -18,15 +21,56 @@ export const ProductDetails = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
 
-  // Returns product details
-  const product: Product | undefined = useMemo(() => {
-    if (productId && products.products) {
-      return products.products.find((x) => x.id === parseInt(productId));
+  // User auth context
+  const { user } = useAuthContext();
+
+  // Outlet context for setting image assets
+  const { setSticky } = useOutletContext<PrivateRouteContext>();
+
+  // react query hooks to fetch products data
+  const { data: product, isPending, isError } = useProductDetails(productId);
+
+  // API call to fetch cart
+  const { data: cartData } = useCartQuery();
+
+  // API call to add product to cart
+  const { mutateAsync } = useAddCartMutation();
+
+  // Main image path
+  const [mainImage, setMainImage] = useState(product?.thumbnail);
+
+  // Return current cart items count
+  const productCart = useMemo(() => {
+    if (cartData && productId && cartData?.carts?.length > 0) {
+      return cartData?.carts[0]?.products.find((x) => x?.id === parseInt(productId));
     }
     return undefined;
+  }, [cartData, productId]);
+
+  // Disable sticky header
+  useEffect(() => {
+    setSticky(true);
   }, []);
 
-  const [mainImage, setMainImage] = useState(product?.thumbnail);
+  /**
+   * Add to cart api call
+   */
+  const addToCart = () => {
+    try {
+      if (!!user && !!product) {
+        navigate(routes.cart);
+        mutateAsync({
+          userId: user?.id,
+          products: [
+            {
+              id: product?.id,
+              quantity: 1,
+            },
+          ],
+        });
+      }
+    } catch (error) {}
+  };
 
   /**
    * Handles click on product thumbnail to change the main image.
@@ -38,7 +82,7 @@ export const ProductDetails = () => {
   /**
    * Adds the current product to the cart and navigates to the cart page.
    */
-  const addToCart = () => {
+  const goToCart = () => {
     navigate(routes.cart);
   };
 
@@ -46,7 +90,7 @@ export const ProductDetails = () => {
   const renderProductImage = () => (
     <div className='w-full md:w-3/5 lg:w-1/2'>
       <img
-        src={mainImage}
+        src={mainImage || product?.thumbnail}
         alt={product?.title}
         className='mx-auto h-72 w-full rounded-lg border border-border bg-secondary object-contain shadow-md md:h-80 dark:border-border-dark dark:bg-secondary-dark'
       />
@@ -81,24 +125,30 @@ export const ProductDetails = () => {
       <DetailRow heading={productDetails.brand} value={product?.brand} />
       <DetailRow heading={productDetails.category} value={product?.category} />
       <DetailRow heading={productDetails.stock} value={product?.stock} />
-      <Button
-        title={productDetails.addToCart}
-        className='w-full min-w-64 lg:w-auto'
-        onClick={addToCart}
-      />
+      {!!!productCart ? (
+        <Button
+          title={productDetails.addToCart}
+          className='w-full min-w-64 lg:w-auto'
+          onClick={addToCart}
+        />
+      ) : (
+        <Button
+          title={productDetails.goToCart}
+          className='w-full min-w-64 lg:w-auto'
+          onClick={goToCart}
+        />
+      )}
     </div>
   );
 
-  if (product) {
-    return (
+  return (
+    <PageWrapper isError={isError} isPending={isPending}>
       <div className='mx-4 my-4 box-border h-fit max-w-screen-xl text-color md:my-8 xl:mx-auto dark:text-color-dark'>
         <div className='flex h-fit w-full flex-col space-y-4 md:flex-row md:space-x-8'>
           {renderProductImage()}
-          {renderProductDetails(product)}
+          {!!product && renderProductDetails(product)}
         </div>
       </div>
-    );
-  } else {
-    <></>;
-  }
+    </PageWrapper>
+  );
 };

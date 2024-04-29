@@ -8,17 +8,20 @@ import { User } from 'types';
  * It also handles user persistence using local storage.
  */
 export const useAuthUser = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | undefined>();
   const [isAppReady, setIsAppReady] = useState<boolean>(false);
+  const [token, setToken] = useState<string | undefined>();
   const { setItem, getItem } = useLocalStorage();
 
   // Load user data from local storage when the component mounts
   useEffect(() => {
     try {
       // Retrieve user data from local storage
+      const token = getItem('token');
       const storedUser = getItem('user');
       // If user data exists in local storage, set the user state
-      if (storedUser) {
+      if (token && storedUser) {
+        setToken(JSON.parse(token));
         setUser(JSON.parse(storedUser));
       }
     } catch (error) {
@@ -41,16 +44,34 @@ export const useAuthUser = () => {
    * Removes the current user from the user state and local storage.
    */
   const removeUser = () => {
-    setUser(null);
+    setUser(undefined);
     setItem('user', '');
+  };
+
+  /**
+   * Adds a new token to the token state and persists it to local storage.
+   * @param token The token to be added.
+   */
+  const addToken = (token: string) => {
+    setToken(token);
+    setItem('token', JSON.stringify(token));
+  };
+
+  /**
+   * Removes the token from the token state and local storage.
+   */
+  const removeToken = () => {
+    setToken(undefined);
+    setItem('token', '');
   };
 
   /**
    * Logs in the user by adding the provided user object to the user state and local storage.
    * @param user The user object representing the logged-in user.
    */
-  const login = (user: User) => {
+  const login = ({ user, token }: { user: User; token: string }) => {
     addUser(user);
+    addToken(token);
   };
 
   /**
@@ -58,8 +79,9 @@ export const useAuthUser = () => {
    */
   const logout = () => {
     removeUser();
+    removeToken();
   };
 
   // Return the user state, login and logout functions, and app ready status
-  return { user, login, logout, isAppReady };
+  return { user, token, login, logout, addUser, isAppReady };
 };

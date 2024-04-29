@@ -26,8 +26,8 @@ import { PrivateRoute, PublicRoutes, PolicyRoutes } from 'routers';
  */
 export const AppRouter: FC = () => {
   // Fetching user authentication status from context
-  const { user, isAppReady } = useAuthContext();
-  const isAuthenticated = !!user;
+  const { token, isAppReady } = useAuthContext();
+  const isAuthenticated = !!token;
 
   // Creating a browser router instance
   const router = createBrowserRouter(
