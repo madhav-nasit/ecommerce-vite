@@ -77,6 +77,8 @@ export const strings = {
     cart: {
       title: 'Your Cart',
       price: 'Price',
+      subTotal: 'Sub Total',
+      discount: 'Discount',
       total: 'Total',
       cartSummary: 'Cart summary',
     },

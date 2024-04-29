@@ -33,6 +33,12 @@ export default {
       padding: {
         navbar: '72px',
       },
+      fontSize: {
+        '8px': '8px',
+      },
+      lineHeight: {
+        '8px': '10px',
+      },
       // that is animation class
       animation: {
         fadeIn: 'fadeIn 0.2s ease-in-out',

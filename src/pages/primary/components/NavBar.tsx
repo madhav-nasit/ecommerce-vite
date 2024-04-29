@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MenuIcon } from 'assets/svgs';
 import { ThemeToggle } from 'components';
 import { routes, strings } from 'constants';
-import { MenuItem, ProfileMenu } from 'pages';
-import { useUserQuery } from 'queries';
+import { CartButton, MenuItem, ProfileMenu } from 'pages';
+import { useCartQuery, useUserQuery } from 'queries';
 import { useAuthContext } from 'hooks';
 
 interface NavBarProps {
@@ -29,6 +29,17 @@ export const NavBar = ({ sticky = true }: NavBarProps) => {
   // API call to fetch user
   const { data: userData } = useUserQuery();
 
+  // API call to fetch cart
+  const { data: cartData } = useCartQuery();
+
+  // Return current cart items count
+  const cartCount = useMemo(() => {
+    if (cartData && cartData?.carts?.length > 0) {
+      return cartData?.carts[0]?.totalProducts;
+    }
+    return 0;
+  }, [cartData]);
+
   // Update user data to the Auth Context
   useEffect(() => {
     if (userData) {
@@ -43,7 +54,7 @@ export const NavBar = ({ sticky = true }: NavBarProps) => {
   const renderHeader = () => (
     <a href={routes.root} className='flex items-center space-x-3 rtl:space-x-reverse'>
       <img src='/logo.svg' className='size-8 h-8 md:size-10' alt='App logo' />
-      <span className='self-center whitespace-nowrap text-xl font-semibold text-color md:text-2xl dark:text-color-dark'>
+      <span className='hidden self-center whitespace-nowrap text-xl font-semibold text-color md:block md:text-2xl dark:text-color-dark'>
         {common.appName}
       </span>
     </a>
@@ -85,6 +96,7 @@ export const NavBar = ({ sticky = true }: NavBarProps) => {
         {renderHeader()}
         <div className='flex items-center space-x-2 md:order-2 md:space-x-3 rtl:space-x-reverse'>
           <ThemeToggle />
+          <CartButton count={cartCount} />
           <ProfileMenu user={userData} />
           {renderMenuButton()}
         </div>

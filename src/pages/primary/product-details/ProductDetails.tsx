@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { routes, strings } from 'constants';
 import { Button, PageWrapper } from 'components';
 import { Product } from 'types';
+import { PrivateRouteContext } from 'routers';
 import { useProductDetails } from 'queries';
 import { DetailRow } from './components';
 
@@ -19,10 +20,18 @@ export const ProductDetails = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
 
+  // Outlet context for setting image assets
+  const { setSticky } = useOutletContext<PrivateRouteContext>();
+
   // react query hooks to fetch products data
   const { data: product, isPending, isError } = useProductDetails(productId);
 
   const [mainImage, setMainImage] = useState(product?.thumbnail);
+
+  // Disable sticky header
+  useEffect(() => {
+    setSticky(true);
+  }, []);
 
   /**
    * Handles click on product thumbnail to change the main image.

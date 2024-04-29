@@ -19,5 +19,7 @@ export const endPoints = {
     allCategories: '/products/categories',
     /** Get products for selected category */
     productCategory: '/products/category',
+    /** Get cart of the user */
+    cart: 'carts/user',
   },
 };

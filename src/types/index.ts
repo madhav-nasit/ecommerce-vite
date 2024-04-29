@@ -30,7 +30,7 @@ export interface Product {
   images: string[];
 }
 
-export interface Cart {
+export interface CartItem {
   id: number;
   title: string;
   price: number;
@@ -58,4 +58,21 @@ export interface GetProductReq {
   categoryName?: string;
   limit?: number;
   skip?: number;
+}
+
+export interface CartRes {
+  limit: number;
+  skip: number;
+  total: number;
+  carts: Carts[];
+}
+
+export interface Carts {
+  discountedTotal: number;
+  id: number;
+  products: CartItem[];
+  total: number;
+  totalProducts: number;
+  totalQuantity: number;
+  userId: number;
 }
