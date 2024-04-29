@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import useApi, { endPoints } from 'api';
-import { ProductRes } from 'types';
+import { Product, ProductRes } from 'types';
 
 /**
  * Custom hook for querying products based on category, limit, and skip parameters.
@@ -78,7 +78,7 @@ const useCategoryQuery = () => {
  *
  * @param productId The ID of the product to retrieve details for.
  */
-const useProductDetails = (productId: number) => {
+const useProductDetails = (productId?: string) => {
   /**
    * useApi: A custom hook for accessing the API instance
    */
@@ -89,7 +89,7 @@ const useProductDetails = (productId: number) => {
    */
   const getProductDetails = async () => {
     try {
-      const res: string[] = await api.get(endPoints.primary.allCategories);
+      const res: Product = await api.get(`${endPoints.primary.products}/${productId}`);
       return res;
     } catch (error: any) {
       throw error;

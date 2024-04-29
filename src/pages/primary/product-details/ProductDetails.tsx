@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { products, routes, strings } from 'constants';
+import { routes, strings } from 'constants';
+import { Button, PageWrapper } from 'components';
 import { Product } from 'types';
-import { Button } from 'components';
+import { useProductDetails } from 'queries';
 import { DetailRow } from './components';
 
 /**
@@ -18,13 +19,8 @@ export const ProductDetails = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
 
-  // Returns product details
-  const product: Product | undefined = useMemo(() => {
-    if (productId && products.products) {
-      return products.products.find((x) => x.id === parseInt(productId));
-    }
-    return undefined;
-  }, []);
+  // react query hooks to fetch products data
+  const { data: product, isPending, isError } = useProductDetails(productId);
 
   const [mainImage, setMainImage] = useState(product?.thumbnail);
 
@@ -46,7 +42,7 @@ export const ProductDetails = () => {
   const renderProductImage = () => (
     <div className='w-full md:w-3/5 lg:w-1/2'>
       <img
-        src={mainImage}
+        src={mainImage || product?.thumbnail}
         alt={product?.title}
         className='mx-auto h-72 w-full rounded-lg border border-border bg-secondary object-contain shadow-md md:h-80 dark:border-border-dark dark:bg-secondary-dark'
       />
@@ -89,16 +85,14 @@ export const ProductDetails = () => {
     </div>
   );
 
-  if (product) {
-    return (
+  return (
+    <PageWrapper isError={isError} isPending={isPending}>
       <div className='mx-4 my-4 box-border h-fit max-w-screen-xl text-color md:my-8 xl:mx-auto dark:text-color-dark'>
         <div className='flex h-fit w-full flex-col space-y-4 md:flex-row md:space-x-8'>
           {renderProductImage()}
-          {renderProductDetails(product)}
+          {!!product && renderProductDetails(product)}
         </div>
       </div>
-    );
-  } else {
-    <></>;
-  }
+    </PageWrapper>
+  );
 };
