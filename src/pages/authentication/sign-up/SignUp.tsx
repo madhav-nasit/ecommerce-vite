@@ -64,7 +64,6 @@ export const SignUp: FC = () => {
       // Call signup user api
       try {
         await mutateAsync({
-          username: values.firstName,
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
