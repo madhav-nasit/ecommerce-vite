@@ -9,7 +9,7 @@ import { Product, ProductRes } from 'types';
  * @param limit The maximum number of products to retrieve per request.
  * @param skip The number of products to skip from the beginning of the result set.
  */
-const useProductQuery = (categoryName: string, limit: number, skip: number) => {
+const useProductQuery = (categoryName: string, limit: number, page: number) => {
   /**
    * useApi: A custom hook for accessing the API instance
    */
@@ -20,15 +20,11 @@ const useProductQuery = (categoryName: string, limit: number, skip: number) => {
    */
   const getProducts = async () => {
     try {
-      const endPoint =
-        !!categoryName && categoryName !== 'all'
-          ? `${endPoints.primary.productCategory}/${categoryName}`
-          : endPoints.primary.products;
-
-      const res: ProductRes = await api.get(endPoint, {
+      const res: ProductRes = await api.get(endPoints.primary.products, {
         params: {
           limit,
-          skip,
+          page,
+          ...(categoryName && categoryName !== 'all' && { category: categoryName }),
         },
       });
       return res;
@@ -38,7 +34,7 @@ const useProductQuery = (categoryName: string, limit: number, skip: number) => {
   };
 
   return useQuery({
-    queryKey: ['ProductsQueryKey', limit, skip, categoryName],
+    queryKey: ['ProductsQueryKey', limit, page, categoryName],
     queryFn: getProducts,
   });
 };
@@ -57,7 +53,7 @@ const useCategoryQuery = () => {
    */
   const getCategories = async () => {
     try {
-      const res: string[] = await api.get(endPoints.primary.allCategories);
+      const res: { _id: string; name: string }[] = await api.get(endPoints.primary.allCategories);
       return res;
     } catch (error: any) {
       throw error;

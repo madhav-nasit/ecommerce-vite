@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MenuIcon } from 'assets/svgs';
 import { ThemeToggle } from 'components';
@@ -23,6 +23,7 @@ export const NavBar = ({ sticky = true }: NavBarProps) => {
 
   // State for controlling the visibility of the menu
   const [menuVisible, setMenuVisible] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   // Functions of Auth Context
   const { addUser } = useAuthContext();
@@ -34,11 +35,12 @@ export const NavBar = ({ sticky = true }: NavBarProps) => {
   const { data: cartData } = useCartQuery();
 
   // Return current cart items count
-  const cartCount = useMemo(() => {
-    if (cartData && cartData?.carts?.length > 0) {
-      return cartData?.carts[0]?.totalProducts;
+  useEffect(() => {
+    if (cartData && cartData?.products?.length > 0) {
+      setCartCount(cartData?.products.length);
+    } else {
+      setCartCount(0);
     }
-    return 0;
   }, [cartData]);
 
   // Update user data to the Auth Context

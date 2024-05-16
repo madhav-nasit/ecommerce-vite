@@ -13,17 +13,17 @@ interface ProductListProps {
  */
 export const ProductList = ({ products }: ProductListProps): JSX.Element => {
   const navigate = useNavigate();
-  const navigateToProductDetails = (id: number) => {
+  const navigateToProductDetails = (id: string) => {
     navigate(`${routes.products}/${id}`);
   };
   return (
     <div className='mx-auto grid max-w-screen-xl grid-cols-2 gap-4 px-2 py-2 sm:grid-cols-3 md:grid-cols-4 md:px-4 md:py-4 lg:grid-cols-5'>
       {products.map((product) => (
         <button
-          key={product.id}
+          key={product._id}
           type='button'
           className='flex flex-col overflow-hidden rounded-lg bg-card shadow-md hover:scale-105 dark:bg-card-dark'
-          onClick={() => navigateToProductDetails(product.id)}
+          onClick={() => navigateToProductDetails(product._id)}
         >
           <img src={product.thumbnail} alt={product.title} className=' h-40 w-full object-cover' />
           <div className='flex w-full flex-col items-stretch p-3'>

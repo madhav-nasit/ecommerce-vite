@@ -19,7 +19,6 @@ export const Home = () => {
   const navigate = useNavigate();
 
   // Constants
-  const skip = (parseInt(page) - 1) * PRODUCT_LIMIT;
   const limit = PRODUCT_LIMIT;
   const {
     primary: { home },
@@ -28,7 +27,11 @@ export const Home = () => {
   // react query hooks to fetch categories data
   const { data: categories } = useCategoryQuery();
   // react query hooks to fetch products data
-  const { data: productData, isPending, isError } = useProductQuery(categoryName, limit, skip);
+  const {
+    data: productData,
+    isPending,
+    isError,
+  } = useProductQuery(categoryName, limit, parseInt(page));
 
   // Outlet context for setting image assets
   const { setSticky } = useOutletContext<PrivateRouteContext>();
@@ -62,7 +65,7 @@ export const Home = () => {
     <div className='flex h-fit w-screen justify-center bg-background dark:bg-background-dark'>
       <div className='h-fit w-full'>
         <CategoriesSlider
-          categories={categories ? ['all', ...categories] : ['all']}
+          categories={categories ? ['all', ...categories.map((item) => item.name)] : ['all']}
           categoryName={categoryName}
         />
         <PageWrapper isError={isError} isPending={isPending} emptyMsg={errorMsg}>

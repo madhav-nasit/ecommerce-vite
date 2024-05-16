@@ -1,20 +1,18 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import useApi, { endPoints } from 'api';
-import { useAuthContext } from 'hooks';
 import { queryClient } from 'src/App';
-import { AddCart, CartItem, CartRes, Carts, UpdateCartReq } from 'types';
+import { AddCart, CartItem, Carts } from 'types';
 
 /**
  * Custom hook for querying the cart items of the current user.
  */
 const useCartQuery = () => {
   const api = useApi();
-  const { user } = useAuthContext();
 
   // Function to fetch cart items
   const getCart = async () => {
     try {
-      const res: CartRes = await api.get(`${endPoints.primary.cart}/${user?.id}`);
+      const res: Carts = await api.get(`${endPoints.primary.cart}`);
       return res;
     } catch (error) {
       // Handle errors gracefully
@@ -37,7 +35,7 @@ const useAddCartMutation = () => {
 
   const addCart = async (addCartReq: AddCart) => {
     try {
-      const response: CartItem = await api.post(endPoints.primary.addCart, addCartReq);
+      const response: CartItem = await api.post(endPoints.primary.cart, addCartReq);
       return response;
     } catch (error) {
       // Handle errors gracefully
@@ -48,36 +46,9 @@ const useAddCartMutation = () => {
   return useMutation({
     mutationKey: ['CartQueryKey'],
     mutationFn: addCart,
-  });
-};
-
-/**
- * Custom hook for updating a cart item.
- */
-const useUpdateCartMutation = () => {
-  const api = useApi();
-
-  const updateCart = async ({
-    cartId,
-    updateData,
-  }: {
-    cartId: number;
-    updateData: UpdateCartReq;
-  }) => {
-    try {
-      const response: Carts = await api.put(`${endPoints.primary.carts}/${cartId}`, updateData);
-      // Invalidate cache to reflect changes
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['CartQueryKey'] });
-      return response;
-    } catch (error) {
-      // Handle errors gracefully
-      throw error;
-    }
-  };
-
-  return useMutation({
-    mutationKey: ['CartQueryKey'],
-    mutationFn: updateCart,
+    },
   });
 };
 
@@ -87,11 +58,11 @@ const useUpdateCartMutation = () => {
 const useDeleteCartMutation = () => {
   const api = useApi();
 
-  const deleteCart = async ({ cartId }: { cartId: number }) => {
+  const deleteCart = async ({ cartId, productId }: { cartId?: string; productId?: string }) => {
     try {
-      const response: Carts = await api.delete(`${endPoints.primary.carts}/${cartId}`);
-      // Invalidate cache to reflect changes
-      queryClient.invalidateQueries({ queryKey: ['CartQueryKey'] });
+      const response: Carts = await api.delete(`${endPoints.primary.cart}`, {
+        params: { cartId, productId },
+      });
       return response;
     } catch (error) {
       // Handle errors gracefully
@@ -102,7 +73,10 @@ const useDeleteCartMutation = () => {
   return useMutation({
     mutationKey: ['CartQueryKey'],
     mutationFn: deleteCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['CartQueryKey'] });
+    },
   });
 };
 
-export { useCartQuery, useAddCartMutation, useUpdateCartMutation, useDeleteCartMutation };
+export { useCartQuery, useAddCartMutation, useDeleteCartMutation };
