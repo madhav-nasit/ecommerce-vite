@@ -5,25 +5,21 @@ export const endPoints = {
   /** Endpoints for authentication. */
   auth: {
     /** Endpoint for user login. */
-    logIn: '/auth/login',
+    logIn: 'auth/sign-in',
     /** Endpoint for user sign-up. */
-    signUp: '/users/add',
+    signUp: 'auth/sign-up',
     /** Endpoint for get user details. */
-    getUser: '/auth/me',
+    getUser: '/auth/profile',
   },
   /** Endpoints for app. */
   primary: {
     /** Get all products */
-    products: '/products',
+    products: '/product',
     /** Get categories */
-    allCategories: '/products/categories',
-    /** Get products for selected category */
-    productCategory: '/products/category',
+    allCategories: '/product/categories',
     /** Get cart of the user */
-    cart: 'carts/user',
-    /** Add to cart */
-    addCart: 'carts/add',
-    /** Update cart */
-    carts: '/carts',
+    cart: '/cart',
+    /** Get order of the user */
+    order: '/order',
   },
 };

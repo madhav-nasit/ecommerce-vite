@@ -34,6 +34,7 @@ export const strings = {
   auth: {
     common: {
       userName: 'User Name',
+      email: 'Email',
       emailAddress: 'Email Address',
       password: 'Password',
       confirmPassword: 'Confirm Password',

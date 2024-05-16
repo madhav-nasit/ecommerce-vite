@@ -13,7 +13,7 @@ import { showSuccessToast } from 'utils';
  * Yup schema for sign-in page validation
  */
 const SignInSchema = Yup.object().shape({
-  userName: schema.userName,
+  email: schema.email,
   password: schema.password,
 });
 
@@ -50,7 +50,7 @@ export const SignIn: FC = () => {
   // Formik form configuration for sign-in form
   const formik = useFormik({
     initialValues: {
-      userName: '',
+      email: '',
       password: '',
     },
     validationSchema: SignInSchema,
@@ -58,7 +58,7 @@ export const SignIn: FC = () => {
       try {
         // Handle form submission
         const user = await mutateAsync({
-          username: values.userName,
+          email: values.email,
           password: values.password,
         });
         if (!!user && user?.token) {
@@ -90,11 +90,11 @@ export const SignIn: FC = () => {
 
       {/* Email and password input fields */}
       <Input
-        id='userName'
-        label={common.userName}
+        id='email'
+        label={common.email}
         onChange={formik.handleChange}
-        value={formik.values.userName}
-        error={formik.errors.userName}
+        value={formik.values.email}
+        error={formik.errors.email}
         required
       />
       <Input

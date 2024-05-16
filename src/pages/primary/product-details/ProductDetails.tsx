@@ -41,8 +41,8 @@ export const ProductDetails = () => {
 
   // Return current cart items count
   const productCart = useMemo(() => {
-    if (cartData && productId && cartData?.carts?.length > 0) {
-      return cartData?.carts[0]?.products.find((x) => x?.id === parseInt(productId));
+    if (cartData && productId) {
+      return cartData?.products.find((x) => x?.product._id === productId);
     }
     return undefined;
   }, [cartData, productId]);
@@ -55,19 +55,14 @@ export const ProductDetails = () => {
   /**
    * Add to cart api call
    */
-  const addToCart = () => {
+  const addToCart = async () => {
     try {
       if (!!user && !!product) {
-        navigate(routes.cart);
-        mutateAsync({
-          userId: user?.id,
-          products: [
-            {
-              id: product?.id,
-              quantity: 1,
-            },
-          ],
+        await mutateAsync({
+          productId: product?._id,
+          quantity: 1,
         });
+        navigate(routes.cart);
       }
     } catch (error) {}
   };

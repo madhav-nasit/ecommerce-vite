@@ -1,6 +1,5 @@
 export interface User {
   id: number;
-  username: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -17,7 +16,7 @@ export interface ProductRes {
 }
 
 export interface Product {
-  id: number;
+  _id: string;
   title: string;
   description: string;
   price: number;
@@ -31,18 +30,12 @@ export interface Product {
 }
 
 export interface CartItem {
-  id: number;
-  title: string;
-  price: number;
+  product: Product;
   quantity: number;
-  total: number;
-  discountPercentage: number;
-  discountedPrice: number;
-  thumbnail: string;
 }
 
 export interface SignInReq {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -51,7 +44,6 @@ export interface SignUpReq {
   lastName: string;
   email: string;
   password: string;
-  username: string;
 }
 
 export interface GetProductReq {
@@ -68,21 +60,32 @@ export interface CartRes {
 }
 
 export interface Carts {
-  discountedTotal: number;
-  id: number;
-  products: CartItem[];
-  total: number;
-  totalProducts: number;
-  totalQuantity: number;
+  _id: string;
+  products: {
+    product: Product;
+    quantity: number;
+  }[];
   userId: number;
+  totalAmount: number;
+  totalDiscount: number;
+  finalAmount: number;
+}
+
+export interface Order extends Carts {
+  status:
+    | 'ORDER_PLACED'
+    | 'ORDER_PROCESSING'
+    | 'ORDER_SHIPPED'
+    | 'IN_TRANSIT'
+    | 'OUT_FOR_DELIVERY'
+    | 'DELIVERED'
+    | 'ORDER_COMPLETED'
+    | 'CANCELLED';
 }
 
 export interface AddCart {
-  userId: number;
-  products: {
-    id: number;
-    quantity: number;
-  }[];
+  productId: string;
+  quantity: number;
 }
 
 export interface UpdateCartReq {
