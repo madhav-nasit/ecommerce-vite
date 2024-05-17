@@ -5,6 +5,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   label?: string;
   error?: string;
+  className?: string;
 }
 
 /**
@@ -12,7 +13,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
  * @param {InputProps} props - Props for the Input component.
  */
 export const Input = (props: InputProps) => {
-  const { type = 'text', id, label, error, ...rest } = props;
+  const { type = 'text', id, label, error, className, ...rest } = props;
 
   return (
     <div className='mb-4 w-full'>
@@ -20,7 +21,7 @@ export const Input = (props: InputProps) => {
         <input
           type={type}
           id={id}
-          className={`block w-full appearance-none border-0 border-b-2 border-border bg-transparent px-0 pb-1 pt-4 text-sm text-color focus:border-primary focus:outline-none focus:ring-0 dark:border-border-dark dark:text-color-dark dark:focus:border-background ${
+          className={`block w-full appearance-none border-0 border-b-2 border-border bg-transparent px-0 pb-1 pt-4 text-sm text-color focus:border-primary focus:outline-none focus:ring-0 dark:border-border-dark dark:text-color-dark dark:focus:border-background ${className} ${
             !!error
               ? 'border-error focus:border-error dark:border-error-dark dark:focus:border-error-dark'
               : ''

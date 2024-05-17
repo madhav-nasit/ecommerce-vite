@@ -1,10 +1,8 @@
 export interface User {
-  id: number;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
-  gender: string;
-  image: string;
   token?: string;
 }
 
@@ -94,4 +92,31 @@ export interface UpdateCartReq {
     id: number;
     quantity: number;
   }[];
+}
+
+export interface NewUsers {
+  _id: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface Sender {
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}
+
+export interface Message {
+  _id: string;
+  message: string;
+  sender: Sender;
+  timestamp: string;
+}
+
+export interface ChatThread {
+  _id: string;
+  lastMessage: Message;
+  user: User;
 }

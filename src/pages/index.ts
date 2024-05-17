@@ -9,3 +9,5 @@ export * from './terms-of-use/TermsOfUse';
 export * from './privacy-policy/PrivacyPolicy';
 export * from './primary/product-details/ProductDetails';
 export * from './primary/cart/Cart';
+export * from './primary/chat/Chat';
+export * from './primary/inbox/Inbox';

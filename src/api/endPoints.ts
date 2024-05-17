@@ -21,5 +21,13 @@ export const endPoints = {
     cart: '/cart',
     /** Get order of the user */
     order: '/order',
+    /** Get all the users for start the chat */
+    getUsers: '/auth/users',
+    /** Get the new chat id */
+    chatId: '/chat/chat-id',
+    /** Get inbox message */
+    chat: '/chat',
+    /** Get users of new chat */
+    newchat: 'chat/new-users',
   },
 };
