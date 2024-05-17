@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MenuIcon } from 'assets/svgs';
 import { ThemeToggle } from 'components';
 import { routes, strings } from 'constants';
-import { CartButton, MenuItem, ProfileMenu } from 'pages';
+import { CartButton, ChatButton, MenuItem, ProfileMenu } from 'pages';
 import { useCartQuery, useUserQuery } from 'queries';
 import { useAuthContext } from 'hooks';
 
@@ -99,6 +99,7 @@ export const NavBar = ({ sticky = true }: NavBarProps) => {
         {renderHeader()}
         <div className='flex items-center space-x-2 md:order-2 md:space-x-3 rtl:space-x-reverse'>
           <ThemeToggle />
+          <ChatButton />
           <CartButton count={cartCount} />
           <ProfileMenu user={userData} />
           {renderMenuButton()}

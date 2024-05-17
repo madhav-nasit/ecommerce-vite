@@ -7,8 +7,10 @@ import {
 } from 'react-router-dom';
 import {
   Cart,
+  Chat,
   ErrorPage,
   Home,
+  Inbox,
   PrivacyPolicy,
   ProductDetails,
   SignIn,
@@ -41,6 +43,8 @@ export const AppRouter: FC = () => {
           <Route path={'/:categoryName/:page'} element={<Home />} />
           <Route path={`${routes.products}/:productId`} element={<ProductDetails />} />
           <Route path={`${routes.cart}`} element={<Cart />} />
+          <Route path={`${routes.inbox}`} element={<Inbox />} />
+          <Route path={`${routes.chat}/:chatId`} element={<Chat />} />
         </Route>
         {/* Auth page route */}
         <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>

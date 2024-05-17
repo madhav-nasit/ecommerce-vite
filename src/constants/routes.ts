@@ -6,4 +6,6 @@ export const routes = {
   privacyPolicy: '/privacy-policy',
   products: '/products',
   cart: '/cart',
+  inbox: '/inbox',
+  chat: '/chat',
 };

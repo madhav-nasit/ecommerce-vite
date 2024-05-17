@@ -35,9 +35,11 @@ export default {
       },
       fontSize: {
         '8px': '8px',
+        '10px': '10px',
       },
       lineHeight: {
         '8px': '10px',
+        '10px': '12px',
       },
       // that is animation class
       animation: {

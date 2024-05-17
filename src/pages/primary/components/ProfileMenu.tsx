@@ -51,7 +51,7 @@ export const ProfileMenu = ({ user }: ProfileMenuProps) => {
   const renderProfileButton = () => (
     <button
       type='button'
-      className={`rounded-full border border-border bg-secondary font-bold hover:scale-110 hover:bg-hover md:size-10 dark:border-border-dark dark:bg-secondary-dark dark:hover:bg-hover-dark`}
+      className={`size-8 rounded-full border border-border bg-secondary font-bold hover:scale-110 hover:bg-hover md:size-10 dark:border-border-dark dark:bg-secondary-dark dark:hover:bg-hover-dark`}
       id='user-menu-button'
       aria-expanded='false'
       data-dropdown-toggle='user-dropdown'

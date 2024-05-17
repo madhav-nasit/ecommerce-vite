@@ -26,7 +26,7 @@ export const PrivateRoute: FC<PrivateRoutesProps> = ({ isAuthenticated }) => {
 
   // If authenticated, render the nested routes
   return (
-    <div className='h-screen w-screen'>
+    <div className='flex h-screen w-screen flex-col'>
       <NavBar sticky={sticky} />
       <Outlet context={{ setSticky }} />
     </div>
