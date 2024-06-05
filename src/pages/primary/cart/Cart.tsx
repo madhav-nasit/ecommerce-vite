@@ -9,6 +9,7 @@ import {
   useDeleteCartMutation,
   usePlaceOrderMutation,
 } from 'queries';
+import { showSuccessToast } from 'utils';
 import { CartItem } from './components';
 
 interface DeleteConfirmation {
@@ -106,6 +107,7 @@ export const Cart: React.FC = () => {
   /** Navigate to root on place order */
   const onPlaceOrder = async () => {
     await placeOrderMutateAsync();
+    showSuccessToast({ message: cartString.orderSuccess });
     navigate(routes.root);
   };
 
