@@ -117,7 +117,6 @@ export const ProductDetails = () => {
         )}
       </div>
       <DetailRow heading={productDetails.rating} value={product?.rating} />
-      <DetailRow heading={productDetails.brand} value={product?.brand} />
       <DetailRow heading={productDetails.category} value={product?.category} />
       <DetailRow heading={productDetails.stock} value={product?.stock} />
       {!!!productCart ? (

@@ -55,7 +55,7 @@ export const Home = () => {
       <ProductList products={productData?.products ?? []} />
       <Pagination
         currentPage={parseInt(page)}
-        totalPages={Math.ceil((productData?.total ?? 0) / PRODUCT_LIMIT)}
+        totalPages={productData?.total ?? 1}
         onPageChange={handlePagination}
       />
     </>

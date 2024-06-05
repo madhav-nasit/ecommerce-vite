@@ -91,6 +91,7 @@ export const strings = {
       delete: 'Delete',
       cancel: 'Cancel',
       placeOrder: 'Place Order',
+      orderSuccess: 'Order placed!',
     },
   },
   apiErrors: {

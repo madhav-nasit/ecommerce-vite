@@ -21,7 +21,7 @@ export const Chat = () => {
   const userId = user?._id;
 
   // Socket instance
-  const socket = io('http://localhost:3000');
+  const socket = io('http://localhost:4000');
 
   // References and state variables
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -111,7 +111,7 @@ export const Chat = () => {
       className={`flex size-8 items-center justify-center rounded-full border border-border bg-secondary dark:border-border-dark dark:bg-secondary-dark`}
     >
       <p className='text-xs font-semibold'>
-        {user.firstName && user.lastName
+        {user?.firstName && user?.lastName
           ? `${user.firstName.charAt(0).toUpperCase()}${user.lastName.charAt(0).toUpperCase()}`
           : ''}
       </p>
@@ -165,7 +165,7 @@ export const Chat = () => {
         <div className='flex h-full flex-col overflow-y-scroll'>
           <div className='border-b border-border bg-secondary px-4 py-2 dark:border-border-dark dark:bg-secondary-dark'>
             <h2 className='text-base text-color dark:text-color-dark'>
-              {state.user.firstName + ' ' + state.user.lastName}
+              {state.user?.firstName + ' ' + state.user?.lastName}
             </h2>
             <div>
               <p className='text-xs'>
