@@ -21,7 +21,7 @@ export const Chat = () => {
   const userId = user?._id;
 
   // Socket instance
-  const socket = io('http://localhost:3000');
+  const socket = io('http://localhost:4000');
 
   // References and state variables
   const messagesEndRef = useRef<HTMLDivElement>(null);
